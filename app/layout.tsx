@@ -1,9 +1,18 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import Navigation from '../src/components/Navigation'
 import Footer from '../src/components/Footer'
 import VideoBackground from '../src/components/VideoBackground'
 import PWAWrapper from '../src/components/PWAWrapper'
+import PWAWrapper from '../src/components/PWAWrapper'
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: '#ea580c',
+}
+
 
 export const metadata: Metadata = {
   title: {
@@ -14,10 +23,22 @@ export const metadata: Metadata = {
   keywords: ['Christian ministry', 'healing from shame', 'trauma recovery', 'biblical guidance', 'prayer support', 'spiritual healing', 'grief support', 'faith-based counseling'],
   authors: [{ name: 'Shame to Flame Ministry' }],
   creator: 'Shame to Flame Ministry',
+  applicationName: 'Shame to Flame Ministry',
+  appleWebApp: {
+    capable: true,
+    title: 'Shame to Flame',
+    statusBarStyle: 'default',
+  },
+  formatDetection: {
+    telephone: false,
+  },
   publisher: 'Shame to Flame Ministry',
   icons: {
     icon: '/flame-icon.svg',
-    apple: '/flame-icon.svg',
+    apple: [
+      { url: '/apple-touch-icon.svg', sizes: '180x180', type: 'image/svg+xml' },
+      { url: '/flame-icon.svg' },
+    ],
   },
   manifest: '/manifest.json',
   metadataBase: new URL('https://shametoflame.faith'),
@@ -55,6 +76,9 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
+  },
+  other: {
+    'mobile-web-app-capable': 'yes',
   },
 }
 
@@ -96,6 +120,7 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <PWAWrapper />
         <VideoBackground />
         <div className="relative z-10">
           <Navigation />
