@@ -26,29 +26,38 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="font-semibold text-lg mb-4 text-flame-300">Quick Links</h3>
+            <h3 className="font-semibold text-lg mb-4 text-flame-300">About</h3>
             <ul className="space-y-2">
+              <li><Link href="/my-story" className="text-gray-300 hover:text-flame-300 transition-colors duration-200">My Story</Link></li>
+              <li><Link href="/why-this-ministry" className="text-gray-300 hover:text-flame-300 transition-colors duration-200">Why This Ministry</Link></li>
+              <li><Link href="/about" className="text-gray-300 hover:text-flame-300 transition-colors duration-200">About Us</Link></li>
+            </ul>
+            <h3 className="font-semibold text-lg mb-4 mt-6 text-flame-300">Resources</h3>
+            <ul className="space-y-2">
+              <li><Link href="/crisis-help" className="text-gray-300 hover:text-flame-300 transition-colors duration-200">Crisis Help</Link></li>
               <li><Link href="/healing-pathways" className="text-gray-300 hover:text-flame-300 transition-colors duration-200">Healing Pathways</Link></li>
               <li><Link href="/daily-fire" className="text-gray-300 hover:text-flame-300 transition-colors duration-200">Daily Fire</Link></li>
-              <li><Link href="/prayer-rock" className="text-gray-300 hover:text-flame-300 transition-colors duration-200">Prayer Rock Archive</Link></li>
               <li><Link href="/ministry-hub" className="text-gray-300 hover:text-flame-300 transition-colors duration-200">Ministry Hub</Link></li>
             </ul>
           </div>
 
           <div>
-            <h3 className="font-semibold text-lg mb-4 text-flame-300">Connect With Us</h3>
-            <div className="space-y-3">
-              <div className="flex items-center space-x-2 text-gray-300">
-                <Mail className="h-4 w-4" />
-                <span className="text-sm">contact@shametoflame.faith</span>
-              </div>
-              <Link
-                href="/contact"
-                className="inline-block bg-flame-600 hover:bg-flame-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
-              >
-                Reach Out for Help
-              </Link>
-            </div>
+            <h3 className="font-semibold text-lg mb-4 text-flame-300">Study Library</h3>
+            <ul className="space-y-2">
+              <li><Link href="/mary-magdalene-apologetic" className="text-gray-300 hover:text-flame-300 transition-colors duration-200">Mary Magdalene</Link></li>
+              <li><Link href="/bible-study" className="text-gray-300 hover:text-flame-300 transition-colors duration-200">Bible Study Hub</Link></li>
+              <li><Link href="/sda-commentary-search" className="text-gray-300 hover:text-flame-300 transition-colors duration-200">SDA Commentary</Link></li>
+            </ul>
+            <h3 className="font-semibold text-lg mb-4 mt-6 text-flame-300">Prayer Rock</h3>
+            <ul className="space-y-2">
+              <li><Link href="/prayer-rock-story" className="text-gray-300 hover:text-flame-300 transition-colors duration-200">The Story</Link></li>
+              <li><Link href="/prayer-rock" className="text-gray-300 hover:text-flame-300 transition-colors duration-200">The Archive</Link></li>
+              <li><Link href="/submit-prayer" className="text-gray-300 hover:text-flame-300 transition-colors duration-200">Submit Prayer</Link></li>
+            </ul>
+            <h3 className="font-semibold text-lg mb-4 mt-6 text-flame-300">Connect</h3>
+            <ul className="space-y-2">
+              <li><Link href="/contact" className="text-gray-300 hover:text-flame-300 transition-colors duration-200">Contact Us</Link></li>
+            </ul>
           </div>
         </div>
 
