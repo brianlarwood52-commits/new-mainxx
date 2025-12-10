@@ -31,6 +31,21 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
+    <loc>https://shametoflame.faith/prayer-rock/blog/the-rock-that-changed-everything</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://shametoflame.faith/prayer-rock/blog/when-family-becomes-the-wound</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://shametoflame.faith/prayer-rock/blog/the-gift-of-spiritual-sensitivity</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://shametoflame.faith/submit-prayer</loc>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>

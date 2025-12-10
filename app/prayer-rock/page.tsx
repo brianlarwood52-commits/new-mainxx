@@ -10,6 +10,32 @@ export const metadata = {
   },
 }
 
+const prayerRockSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Prayer Rock Archive - Answered Prayers & Testimonies",
+  "description": "A sacred collection of prayers, personal reflections, spiritual insights, and testimonies of answered prayers. Real stories of God's faithfulness and transformation.",
+  "url": "https://shametoflame.faith/prayer-rock",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Shame to Flame Ministry",
+    "url": "https://shametoflame.faith"
+  },
+  "mainEntity": {
+    "@type": "Blog",
+    "name": "Prayer Rock Archive",
+    "description": "Personal reflections, prayers, and testimonies from the journey of faith and healing"
+  }
+}
+
 export default function Page() {
-  return <PrayerRock />
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(prayerRockSchema) }}
+      />
+      <PrayerRock />
+    </>
+  )
 }
