@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, Calendar, User, Clock, Tag } from 'lucide-react'
-import { getBlogPostById, blogPosts } from '@/data/blogPosts'
-import Navigation from '@/components/Navigation'
-import Footer from '@/components/Footer'
+import { getBlogPostById, blogPosts } from '../../../../src/data/blogPosts'
+import Navigation from '../../../../src/components/Navigation'
+import Footer from '../../../../src/components/Footer'
 
 export async function generateStaticParams() {
   return blogPosts.map((post) => ({
