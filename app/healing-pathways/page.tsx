@@ -10,6 +10,32 @@ export const metadata = {
   },
 }
 
+const healingPathwaysSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Healing Pathways - Bible-Based Recovery Programs",
+  "description": "Explore guided healing pathways for shame, grief, depression, and trauma. Free biblical resources and structured programs designed to restore hope and emotional wellness.",
+  "url": "https://shametoflame.faith/healing-pathways",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Shame to Flame Ministry",
+    "url": "https://shametoflame.faith"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "Christian Healing and Recovery",
+    "description": "Biblical resources for emotional and spiritual healing"
+  }
+}
+
 export default function Page() {
-  return <HealingPathways />
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(healingPathwaysSchema) }}
+      />
+      <HealingPathways />
+    </>
+  )
 }

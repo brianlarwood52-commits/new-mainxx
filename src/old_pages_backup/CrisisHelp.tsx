@@ -5,7 +5,7 @@ const CrisisHelp = () => {
     <div className="animate-fade-in">
       <section id="emergency" className="py-16 bg-red-50 dark:bg-red-900/20 border-t-4 border-red-200 dark:border-red-700">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-serif text-3xl font-bold text-white mb-6 text-center">
+          <h2 className="font-serif text-3xl font-bold text-gray-800 dark:text-white mb-6 text-center">
             Crisis Support Resources
           </h2>
           <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg mb-6">
@@ -17,7 +17,7 @@ const CrisisHelp = () => {
                 If you are in immediate danger call 000.
               </p>
             </div>
-            <p className="text-white mb-6 text-center text-sm font-bold">
+            <p className="text-gray-700 dark:text-gray-200 mb-6 text-center text-sm font-bold">
               These services are independent from Shame to Flame, and are included for public support and crisis assistance.
             </p>
 

@@ -10,6 +10,28 @@ export const metadata = {
   },
 }
 
+const aboutPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About Shame to Flame Ministry",
+  "description": "Learn about Shame to Flame ministry, our mission to help individuals heal from shame, trauma, and spiritual wounds through biblical guidance and compassionate support.",
+  "url": "https://shametoflame.faith/about",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Shame to Flame Ministry",
+    "url": "https://shametoflame.faith",
+    "description": "A Christian ministry dedicated to helping individuals transform shame into strength through God's healing love and biblical guidance."
+  }
+}
+
 export default function Page() {
-  return <About />
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }}
+      />
+      <About />
+    </>
+  )
 }
