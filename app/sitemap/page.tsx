@@ -31,6 +31,22 @@ export default function SitemapPage() {
       ]
     },
     {
+      title: 'Daily Fire Devotionals',
+      pages: Array.from({ length: 31 }, (_, i) => ({
+        name: `Day ${i + 1}`,
+        url: `/daily-fire/${i + 1}`,
+        description: `Daily devotional for day ${i + 1}`
+      }))
+    },
+    {
+      title: 'Prayer Rock Blog',
+      pages: [
+        { name: 'The Rock That Changed Everything', url: '/prayer-rock/blog/the-rock-that-changed-everything', description: 'The origin story of Shame to Flame Ministry' },
+        { name: 'When Family Becomes the Wound', url: '/prayer-rock/blog/when-family-becomes-the-wound', description: 'Understanding and healing from family dysfunction' },
+        { name: 'The Gift of Spiritual Sensitivity', url: '/prayer-rock/blog/the-gift-of-spiritual-sensitivity', description: 'Embracing your sensitivity as a spiritual gift' },
+      ]
+    },
+    {
       title: 'Study Library',
       pages: [
         { name: 'Bible Study', url: '/bible-study', description: 'Interactive Bible reading and study tools' },
