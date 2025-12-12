@@ -420,7 +420,7 @@ Sent from Shame to Flame Contact Form
             "You are not alone in your journey. We're honored to walk alongside you toward healing and hope."
           </p>
           <p className="text-xs text-gray-500 dark:text-gray-600 mt-8 opacity-70">
-            Page Version: 2
+            Page Version: 8
           </p>
         </div>
       </section>
