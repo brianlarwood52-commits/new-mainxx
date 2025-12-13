@@ -1,5 +1,6 @@
 export interface Devotional {
   id: number;
+  slug: string;
   title: string;
   date: string;
   scripture: {
@@ -16,6 +17,7 @@ export interface Devotional {
 export const devotionals: Devotional[] = [
   {
     id: 1,
+    slug: "your-scars-tell-a-story-of-survival",
     title: "Your Scars Tell a Story of Survival",
     date: "Day 1",
     scripture: {
@@ -35,6 +37,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 2,
+    slug: "when-god-feels-silent",
     title: "When God Feels Silent",
     date: "Day 2",
     scripture: {
@@ -54,6 +57,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 3,
+    slug: "the-courage-to-begin-again",
     title: "The Courage to Begin Again",
     date: "Day 3",
     scripture: {
@@ -73,6 +77,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 4,
+    slug: "healing-isnt-linear",
     title: "Healing Isn't Linear",
     date: "Day 4",
     scripture: {
@@ -92,6 +97,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 5,
+    slug: "the-weight-youre-carrying-isnt-yours",
     title: "The Weight You're Carrying Isn't Yours",
     date: "Day 5",
     scripture: {
@@ -111,6 +117,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 6,
+    slug: "god-sees-you-in-your-hiding",
     title: "God Sees You in Your Hiding",
     date: "Day 6",
     scripture: {
@@ -130,6 +137,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 7,
+    slug: "anxiety-is-not-a-sin",
     title: "Anxiety Is Not a Sin",
     date: "Day 7",
     scripture: {
@@ -149,6 +157,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 8,
+    slug: "your-testimony-is-your-weapon",
     title: "Your Testimony Is Your Weapon",
     date: "Day 8",
     scripture: {
@@ -168,6 +177,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 9,
+    slug: "depression-doesnt-disqualify-you",
     title: "Depression Doesn't Disqualify You",
     date: "Day 9",
     scripture: {
@@ -187,6 +197,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 10,
+    slug: "the-power-of-lament",
     title: "The Power of Lament",
     date: "Day 10",
     scripture: {
@@ -206,6 +217,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 11,
+    slug: "youre-not-too-much",
     title: "You're Not Too Much",
     date: "Day 11",
     scripture: {
@@ -225,6 +237,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 12,
+    slug: "small-steps-still-count",
     title: "Small Steps Still Count",
     date: "Day 12",
     scripture: {
@@ -244,6 +257,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 13,
+    slug: "the-gift-of-anger",
     title: "The Gift of Anger",
     date: "Day 13",
     scripture: {
@@ -263,6 +277,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 14,
+    slug: "you-dont-owe-anyone-your-story",
     title: "You Don't Owe Anyone Your Story",
     date: "Day 14",
     scripture: {
@@ -282,6 +297,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 15,
+    slug: "when-you-cant-feel-gods-love",
     title: "When You Can't Feel God's Love",
     date: "Day 15",
     scripture: {
@@ -301,6 +317,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 16,
+    slug: "the-comparison-trap",
     title: "The Comparison Trap",
     date: "Day 16",
     scripture: {
@@ -320,6 +337,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 17,
+    slug: "rest-is-not-earned",
     title: "Rest Is Not Earned",
     date: "Day 17",
     scripture: {
@@ -339,6 +357,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 18,
+    slug: "forgiving-yourself",
     title: "Forgiving Yourself",
     date: "Day 18",
     scripture: {
@@ -358,6 +377,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 19,
+    slug: "the-sacredness-of-friendship",
     title: "The Sacredness of Friendship",
     date: "Day 19",
     scripture: {
@@ -377,6 +397,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 20,
+    slug: "when-prayer-feels-empty",
     title: "When Prayer Feels Empty",
     date: "Day 20",
     scripture: {
@@ -396,6 +417,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 21,
+    slug: "the-courage-to-set-boundaries",
     title: "The Courage to Set Boundaries",
     date: "Day 21",
     scripture: {
@@ -415,6 +437,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 22,
+    slug: "god-wastes-nothing",
     title: "God Wastes Nothing",
     date: "Day 22",
     scripture: {
@@ -434,6 +457,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 23,
+    slug: "the-power-of-yet",
     title: "The Power of Yet",
     date: "Day 23",
     scripture: {
@@ -453,6 +477,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 24,
+    slug: "triggers-are-invitations",
     title: "Triggers Are Invitations",
     date: "Day 24",
     scripture: {
@@ -472,6 +497,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 25,
+    slug: "you-are-not-your-diagnosis",
     title: "You Are Not Your Diagnosis",
     date: "Day 25",
     scripture: {
@@ -491,6 +517,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 26,
+    slug: "the-ministry-of-presence",
     title: "The Ministry of Presence",
     date: "Day 26",
     scripture: {
@@ -510,6 +537,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 27,
+    slug: "breaking-generational-cycles",
     title: "Breaking Generational Cycles",
     date: "Day 27",
     scripture: {
@@ -529,6 +557,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 28,
+    slug: "sacred-ordinary-days",
     title: "Sacred Ordinary Days",
     date: "Day 28",
     scripture: {
@@ -548,6 +577,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 29,
+    slug: "the-long-obedience",
     title: "The Long Obedience",
     date: "Day 29",
     scripture: {
@@ -567,6 +597,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 30,
+    slug: "permission-to-celebrate",
     title: "Permission to Celebrate",
     date: "Day 30",
     scripture: {
@@ -586,6 +617,7 @@ export const devotionals: Devotional[] = [
   },
   {
     id: 31,
+    slug: "youre-going-to-make-it",
     title: "You're Going to Make It",
     date: "Day 31",
     scripture: {
@@ -623,6 +655,10 @@ export function getTodaysDevotional(): Devotional {
 
 export function getDevotionalById(id: number): Devotional | undefined {
   return devotionals.find(d => d.id === id);
+}
+
+export function getDevotionalBySlug(slug: string): Devotional | undefined {
+  return devotionals.find(d => d.slug === slug);
 }
 
 export function getRecentDevotionals(count: number = 4): Devotional[] {

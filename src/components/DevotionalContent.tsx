@@ -8,6 +8,7 @@ import OfflineDownload from './OfflineDownload';
 
 interface Devotional {
   id: number;
+  slug: string;
   title: string;
   date: string;
   category: string;
@@ -259,7 +260,7 @@ export default function DevotionalContent({
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {relatedDevotionals.map((related) => (
-                <Link key={related.id} href={`/daily-fire/${related.id}`}>
+                <Link key={related.id} href={`/daily-fire/${related.slug}`}>
                   <article className="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden cursor-pointer h-full">
                     <div className="p-6">
                       <div className="flex items-center justify-between mb-3">

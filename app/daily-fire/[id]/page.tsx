@@ -1,16 +1,16 @@
 import { notFound } from 'next/navigation';
-import { getDevotionalById, devotionals, getTodaysDevotional } from '../../../src/data/dailyFireDevotionals';
+import { getDevotionalBySlug, devotionals, getTodaysDevotional } from '../../../src/data/dailyFireDevotionals';
 import DevotionalContent from '../../../src/components/DevotionalContent';
 
 export async function generateStaticParams() {
   return devotionals.map((devotional) => ({
-    id: devotional.id.toString(),
+    id: devotional.slug,
   }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const devotional = getDevotionalById(parseInt(id));
+  const devotional = getDevotionalBySlug(id);
 
   if (!devotional) {
     return {
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
 export default async function DevotionalPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const devotional = getDevotionalById(parseInt(id));
+  const devotional = getDevotionalBySlug(id);
 
   if (!devotional) {
     notFound();
@@ -65,7 +65,7 @@ export default async function DevotionalPage({ params }: { params: Promise<{ id:
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://shametoflame.faith/daily-fire/${devotional.id}`
+      "@id": `https://shametoflame.faith/daily-fire/${devotional.slug}`
     },
     "articleSection": devotional.category,
     "keywords": `daily devotional, ${devotional.category.toLowerCase()}, christian encouragement, biblical hope`

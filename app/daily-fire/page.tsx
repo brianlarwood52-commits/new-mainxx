@@ -126,7 +126,7 @@ function DailyFireContent() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {recentDevotionals.map((devotional, index) => (
-              <Link key={devotional.id} href={`/daily-fire/${devotional.id}`}>
+              <Link key={devotional.id} href={`/daily-fire/${devotional.slug}`}>
                 <article className="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden cursor-pointer">
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-4">
@@ -166,7 +166,7 @@ function DailyFireContent() {
           {showAllDevotionals && (
             <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
               {devotionals.map((devotional) => (
-                <Link key={devotional.id} href={`/daily-fire/${devotional.id}`}>
+                <Link key={devotional.id} href={`/daily-fire/${devotional.slug}`}>
                   <article className="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 overflow-hidden cursor-pointer h-full">
                     <div className="p-5">
                       <div className="flex items-center justify-between mb-3">
