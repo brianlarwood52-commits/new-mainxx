@@ -96,6 +96,21 @@ export default function SettingsContent() {
     }
   };
 
+  const getContentUrl = (type: string, id: string) => {
+    switch (type) {
+      case 'devotional':
+        return `/daily-fire/${id}`;
+      case 'pathway':
+        return `/healing-pathways/${id}`;
+      case 'blog':
+        return `/prayer-rock/blog/${id}`;
+      case 'crisis':
+        return '/crisis-help';
+      default:
+        return '#';
+    }
+  };
+
   const filteredContent = filterType === 'all'
     ? offlineContent
     : offlineContent.filter(item => item.type === filterType);
@@ -231,12 +246,15 @@ export default function SettingsContent() {
                 {filteredContent.map((item) => (
                   <div
                     key={item.id}
-                    className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/30 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors"
+                    className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/30 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors group"
                   >
-                    <div className="flex items-center gap-3 flex-1 min-w-0">
+                    <Link
+                      href={getContentUrl(item.type, item.id)}
+                      className="flex items-center gap-3 flex-1 min-w-0"
+                    >
                       {getContentIcon(item.type)}
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-gray-800 dark:text-white truncate">
+                        <h3 className="font-semibold text-gray-800 dark:text-white truncate group-hover:text-flame-600 dark:group-hover:text-flame-400 transition-colors">
                           {item.title}
                         </h3>
                         <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
@@ -245,7 +263,7 @@ export default function SettingsContent() {
                           <span>Saved {new Date(item.cachedAt).toLocaleDateString()}</span>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                     <button
                       onClick={() => handleDeleteItem(item.id, item.title)}
                       className="ml-4 text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 p-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
