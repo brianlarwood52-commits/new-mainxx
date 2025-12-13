@@ -1,9 +1,10 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, BookOpen, Settings, Search, Bookmark, Share2, Type, Key, Play, Pause, Square, Volume2, VolumeX, User } from 'lucide-react';
+import { ChevronLeft, ChevronRight, BookOpen, Settings, Search, Bookmark, Share2, Type, Key, Play, Pause, Square, Volume2, VolumeX, User, HelpCircle, Download, Star, CheckCircle } from 'lucide-react';
 import BibleApiService from '../services/bibleApi';
 import { bibleVersions, bibleBooks, getBookById, getVersionById } from '../data/bibleData';
+import { detectPlatform, rankVoices, getVoiceQualityBadge, getDownloadInstructions, getPlatformName, type Platform, type VoiceQuality } from '../utils/voiceUtils';
 
 interface BibleReaderProps {
 }
@@ -33,6 +34,11 @@ const BibleReader: React.FC<BibleReaderProps> = () => {
   const [selectedVoice, setSelectedVoice] = useState<SpeechSynthesisVoice | null>(null);
   const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [selectedVerseForReading, setSelectedVerseForReading] = useState<number | null>(null);
+  const [rankedVoices, setRankedVoices] = useState<VoiceQuality[]>([]);
+  const [platform, setPlatform] = useState<Platform>('unknown');
+  const [showVoiceHelp, setShowVoiceHelp] = useState(false);
+  const [previewingVoice, setPreviewingVoice] = useState<string | null>(null);
+  const [showVoiceLibrary, setShowVoiceLibrary] = useState(false);
 
   const speechSynthesisRef = useRef<SpeechSynthesisUtterance | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -40,26 +46,23 @@ const BibleReader: React.FC<BibleReaderProps> = () => {
   const currentBook = getBookById(selectedBook);
   const currentVersion = getVersionById(selectedVersion);
 
-  // Load available voices
+  useEffect(() => {
+    const detectedPlatform = detectPlatform();
+    setPlatform(detectedPlatform);
+  }, []);
+
   useEffect(() => {
     const loadVoices = () => {
       const voices = speechSynthesis.getVoices();
-      const englishVoices = voices.filter(voice => voice.lang.startsWith('en'));
+      const englishVoices = voices.filter(voice => voice.lang.toLowerCase().startsWith('en'));
       setAvailableVoices(englishVoices);
-      
-      // Prefer female voices, then any English voice
-      const femaleVoice = englishVoices.find(voice => 
-        voice.name.toLowerCase().includes('female') || 
-        voice.name.toLowerCase().includes('woman') ||
-        voice.name.toLowerCase().includes('samantha') ||
-        voice.name.toLowerCase().includes('victoria') ||
-        voice.name.toLowerCase().includes('karen') ||
-        voice.name.toLowerCase().includes('susan') ||
-        voice.name.toLowerCase().includes('allison') ||
-        voice.name.toLowerCase().includes('zira')
-      );
-      
-      setSelectedVoice(femaleVoice || englishVoices[0] || null);
+
+      const ranked = rankVoices(englishVoices, platform);
+      setRankedVoices(ranked);
+
+      if (ranked.length > 0 && !selectedVoice) {
+        setSelectedVoice(ranked[0].voice);
+      }
     };
 
     loadVoices();
@@ -68,7 +71,39 @@ const BibleReader: React.FC<BibleReaderProps> = () => {
     return () => {
       speechSynthesis.onvoiceschanged = null;
     };
-  }, []);
+  }, [platform]);
+
+  const previewVoice = (voice: SpeechSynthesisVoice) => {
+    if (speechSynthesis.speaking) {
+      speechSynthesis.cancel();
+    }
+
+    setPreviewingVoice(voice.name);
+
+    const utterance = new SpeechSynthesisUtterance(
+      "For God so loved the world, that He gave His only begotten Son, that whosoever believeth in Him should not perish, but have everlasting life."
+    );
+    utterance.voice = voice;
+    utterance.rate = speechRate;
+    utterance.volume = speechVolume;
+
+    utterance.onend = () => {
+      setPreviewingVoice(null);
+    };
+
+    utterance.onerror = () => {
+      setPreviewingVoice(null);
+    };
+
+    speechSynthesis.speak(utterance);
+  };
+
+  const stopPreview = () => {
+    if (speechSynthesis.speaking) {
+      speechSynthesis.cancel();
+    }
+    setPreviewingVoice(null);
+  };
 
   useEffect(() => {
     loadContent();
@@ -705,23 +740,87 @@ const BibleReader: React.FC<BibleReaderProps> = () => {
                 />
               </div>
 
-              <div className="flex items-center gap-2">
-                <User className="h-4 w-4 text-gray-500" />
-                <span className="text-sm text-gray-700 dark:text-gray-300">Voice:</span>
-                <select
-                  value={selectedVoice?.name || ''}
-                  onChange={(e) => {
-                    const voice = availableVoices.find(v => v.name === e.target.value);
-                    setSelectedVoice(voice || null);
-                  }}
-                  className="px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                >
-                  {availableVoices.map((voice) => (
-                    <option key={voice.name} value={voice.name}>
-                      {voice.name} {voice.name.toLowerCase().includes('female') || voice.name.toLowerCase().includes('woman') ? '♀' : '♂'}
-                    </option>
-                  ))}
-                </select>
+              <div className="col-span-full">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <User className="h-4 w-4 text-gray-500" />
+                    <span className="text-sm text-gray-700 dark:text-gray-300">Voice:</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setShowVoiceLibrary(!showVoiceLibrary)}
+                      className="text-xs px-2 py-1 bg-flame-100 dark:bg-flame-900/30 text-flame-700 dark:text-flame-300 rounded hover:bg-flame-200 dark:hover:bg-flame-800/50 transition-colors"
+                    >
+                      Voice Library
+                    </button>
+                    <button
+                      onClick={() => setShowVoiceHelp(true)}
+                      className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded hover:bg-blue-200 dark:hover:bg-blue-800/50 transition-colors flex items-center gap-1"
+                    >
+                      <Download className="h-3 w-3" />
+                      Get Better Voices
+                    </button>
+                  </div>
+                </div>
+                <div className="mt-2 flex items-center gap-2">
+                  <select
+                    value={selectedVoice?.name || ''}
+                    onChange={(e) => {
+                      const voiceData = rankedVoices.find(v => v.voice.name === e.target.value);
+                      if (voiceData) {
+                        setSelectedVoice(voiceData.voice);
+                      }
+                    }}
+                    className="flex-1 px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                  >
+                    {rankedVoices.map((voiceData) => {
+                      const badge = getVoiceQualityBadge(voiceData.quality);
+                      return (
+                        <option key={voiceData.voice.name} value={voiceData.voice.name}>
+                          {voiceData.voice.name} [{badge.text}] {voiceData.isPlatformOptimal ? '⭐' : ''}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  {selectedVoice && (
+                    <button
+                      onClick={() => previewingVoice === selectedVoice.name ? stopPreview() : previewVoice(selectedVoice)}
+                      className={`px-3 py-1 rounded text-sm transition-colors ${
+                        previewingVoice === selectedVoice.name
+                          ? 'bg-red-600 hover:bg-red-700 text-white'
+                          : 'bg-green-600 hover:bg-green-700 text-white'
+                      }`}
+                    >
+                      {previewingVoice === selectedVoice.name ? (
+                        <Square className="h-4 w-4" />
+                      ) : (
+                        <Play className="h-4 w-4" />
+                      )}
+                    </button>
+                  )}
+                </div>
+                {selectedVoice && rankedVoices.find(v => v.voice.name === selectedVoice.name) && (
+                  <div className="mt-2 flex items-center gap-2 text-xs">
+                    {(() => {
+                      const voiceData = rankedVoices.find(v => v.voice.name === selectedVoice.name);
+                      if (!voiceData) return null;
+                      const badge = getVoiceQualityBadge(voiceData.quality);
+                      return (
+                        <>
+                          <span className={`px-2 py-0.5 rounded-full ${badge.bgColor} ${badge.color} font-medium`}>
+                            {badge.text}
+                          </span>
+                          {voiceData.isPlatformOptimal && (
+                            <span className="flex items-center gap-1 text-yellow-700 dark:text-yellow-300">
+                              <Star className="h-3 w-3 fill-current" />
+                              Optimized for {getPlatformName(platform)}
+                            </span>
+                          )}
+                        </>
+                      );
+                    })()}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -915,6 +1014,249 @@ const BibleReader: React.FC<BibleReaderProps> = () => {
               <div className="font-medium text-gray-800 dark:text-white">Philippians 4:13</div>
               <div className="text-sm text-gray-600 dark:text-gray-300">I can do all things</div>
             </button>
+          </div>
+        </div>
+      )}
+
+      {showVoiceLibrary && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-3xl w-full max-h-[80vh] overflow-hidden flex flex-col">
+            <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+              <div className="flex items-center justify-between">
+                <h3 className="text-2xl font-bold text-gray-800 dark:text-white">Voice Library</h3>
+                <button
+                  onClick={() => {
+                    setShowVoiceLibrary(false);
+                    stopPreview();
+                  }}
+                  className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+                >
+                  ✕
+                </button>
+              </div>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                {rankedVoices.length} voice{rankedVoices.length !== 1 ? 's' : ''} available • Platform: {getPlatformName(platform)}
+              </p>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-6">
+              <div className="space-y-3">
+                {rankedVoices.map((voiceData) => {
+                  const badge = getVoiceQualityBadge(voiceData.quality);
+                  const isSelected = selectedVoice?.name === voiceData.voice.name;
+                  const isPreviewing = previewingVoice === voiceData.voice.name;
+
+                  return (
+                    <div
+                      key={voiceData.voice.name}
+                      className={`p-4 rounded-lg border-2 transition-all ${
+                        isSelected
+                          ? 'border-flame-500 bg-flame-50 dark:bg-flame-900/20'
+                          : 'border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/30'
+                      }`}
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2">
+                            <h4 className="font-medium text-gray-900 dark:text-white">
+                              {voiceData.voice.name}
+                            </h4>
+                            {isSelected && (
+                              <CheckCircle className="h-4 w-4 text-flame-600 dark:text-flame-400" />
+                            )}
+                          </div>
+                          <div className="flex flex-wrap items-center gap-2 text-xs">
+                            <span className={`px-2 py-0.5 rounded-full ${badge.bgColor} ${badge.color} font-medium`}>
+                              {badge.text}
+                            </span>
+                            {voiceData.isPlatformOptimal && (
+                              <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">
+                                <Star className="h-3 w-3 fill-current" />
+                                Best for {getPlatformName(platform)}
+                              </span>
+                            )}
+                            {voiceData.voice.localService && (
+                              <span className="px-2 py-0.5 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">
+                                Local
+                              </span>
+                            )}
+                            <span className="text-gray-600 dark:text-gray-400">
+                              {voiceData.voice.lang}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => isPreviewing ? stopPreview() : previewVoice(voiceData.voice)}
+                            className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                              isPreviewing
+                                ? 'bg-red-600 hover:bg-red-700 text-white'
+                                : 'bg-blue-600 hover:bg-blue-700 text-white'
+                            }`}
+                          >
+                            {isPreviewing ? (
+                              <Square className="h-4 w-4" />
+                            ) : (
+                              <Play className="h-4 w-4" />
+                            )}
+                          </button>
+                          {!isSelected && (
+                            <button
+                              onClick={() => {
+                                setSelectedVoice(voiceData.voice);
+                                setShowVoiceLibrary(false);
+                                stopPreview();
+                              }}
+                              className="px-3 py-2 rounded-lg text-sm font-medium bg-flame-600 hover:bg-flame-700 text-white transition-colors"
+                            >
+                              Select
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="p-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50">
+              <button
+                onClick={() => setShowVoiceHelp(true)}
+                className="w-full px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+              >
+                <Download className="h-5 w-5" />
+                Download Better Voices for {getPlatformName(platform)}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showVoiceHelp && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden flex flex-col">
+            <div className="p-6 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-50 to-flame-50 dark:from-blue-900/30 dark:to-flame-900/30">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-blue-600 rounded-lg">
+                    <HelpCircle className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
+                      {getDownloadInstructions(platform).title}
+                    </h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      Get the best audio quality for Bible reading
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShowVoiceHelp(false)}
+                  className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-6">
+              <div className="space-y-6">
+                <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                  <div className="flex items-start gap-3">
+                    <Volume2 className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-1">
+                        Why Download Better Voices?
+                      </h4>
+                      <p className="text-sm text-blue-800 dark:text-blue-200">
+                        Premium voices sound significantly more natural and are easier to listen to for extended periods. They provide a better Bible reading experience.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                    <span className="flex items-center justify-center w-6 h-6 bg-flame-600 text-white rounded-full text-sm">
+                      1
+                    </span>
+                    Follow these steps:
+                  </h4>
+                  <ol className="space-y-3">
+                    {getDownloadInstructions(platform).steps.map((step, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <span className="flex items-center justify-center w-6 h-6 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm flex-shrink-0">
+                          {index + 1}
+                        </span>
+                        <span className="text-gray-700 dark:text-gray-300 flex-1 pt-0.5">
+                          {step}
+                        </span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+
+                {getDownloadInstructions(platform).note && (
+                  <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
+                    <div className="flex items-start gap-3">
+                      <Star className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <h4 className="font-semibold text-yellow-900 dark:text-yellow-100 mb-1">
+                          Important Note
+                        </h4>
+                        <p className="text-sm text-yellow-800 dark:text-yellow-200">
+                          {getDownloadInstructions(platform).note}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                <div className="bg-gradient-to-r from-sky-50 to-flame-50 dark:from-sky-900/20 dark:to-flame-900/20 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
+                    Current Voice Quality
+                  </h4>
+                  {selectedVoice && rankedVoices.find(v => v.voice.name === selectedVoice.name) && (
+                    <div className="flex items-center gap-2">
+                      {(() => {
+                        const voiceData = rankedVoices.find(v => v.voice.name === selectedVoice.name);
+                        if (!voiceData) return null;
+                        const badge = getVoiceQualityBadge(voiceData.quality);
+                        return (
+                          <>
+                            <span className={`px-3 py-1 rounded-full ${badge.bgColor} ${badge.color} font-medium`}>
+                              {badge.text}
+                            </span>
+                            <span className="text-sm text-gray-600 dark:text-gray-400">
+                              {selectedVoice.name}
+                            </span>
+                          </>
+                        );
+                      })()}
+                    </div>
+                  )}
+                  {rankedVoices.some(v => v.quality === 'premium' || v.quality === 'enhanced') ? (
+                    <p className="text-sm text-green-700 dark:text-green-300 mt-2">
+                      Great news! You already have some high-quality voices installed. Check the Voice Library to try them.
+                    </p>
+                  ) : (
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                      Follow the steps above to download better voices for an enhanced listening experience.
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="p-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50">
+              <button
+                onClick={() => setShowVoiceHelp(false)}
+                className="w-full px-4 py-3 bg-flame-600 hover:bg-flame-700 text-white rounded-lg font-medium transition-colors"
+              >
+                Got it, thanks!
+              </button>
+            </div>
           </div>
         </div>
       )}
