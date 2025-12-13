@@ -1,6 +1,7 @@
-const CACHE_NAME = 'shame-to-flame-v2';
-const STATIC_CACHE = 'shame-to-flame-static-v2';
-const DYNAMIC_CACHE = 'shame-to-flame-dynamic-v2';
+const CACHE_NAME = 'shame-to-flame-v3';
+const STATIC_CACHE = 'shame-to-flame-static-v3';
+const DYNAMIC_CACHE = 'shame-to-flame-dynamic-v3';
+const CRISIS_CACHE = 'shame-to-flame-crisis-v1';
 
 // Core files to cache immediately
 const CORE_ASSETS = [
@@ -16,21 +17,34 @@ const CORE_ASSETS = [
   '/about'
 ];
 
-// Install event - cache core assets
+// Crisis resources - ALWAYS cached automatically
+const CRISIS_ASSETS = [
+  '/crisis-help',
+  '/crisis-resources.json'
+];
+
+// Install event - cache core assets and crisis resources
 self.addEventListener('install', (event) => {
   console.log('Service Worker: Installing...');
   event.waitUntil(
-    caches.open(STATIC_CACHE)
-      .then((cache) => {
-        console.log('Service Worker: Caching core assets');
-        return cache.addAll(CORE_ASSETS);
-      })
+    Promise.all([
+      caches.open(STATIC_CACHE)
+        .then((cache) => {
+          console.log('Service Worker: Caching core assets');
+          return cache.addAll(CORE_ASSETS);
+        }),
+      caches.open(CRISIS_CACHE)
+        .then((cache) => {
+          console.log('Service Worker: Caching crisis resources (CRITICAL)');
+          return cache.addAll(CRISIS_ASSETS);
+        })
+    ])
       .then(() => {
-        console.log('Service Worker: Core assets cached');
+        console.log('Service Worker: All critical assets cached');
         return self.skipWaiting();
       })
       .catch((error) => {
-        console.error('Service Worker: Failed to cache core assets', error);
+        console.error('Service Worker: Failed to cache assets', error);
       })
   );
 });
@@ -43,7 +57,7 @@ self.addEventListener('activate', (event) => {
       .then((cacheNames) => {
         return Promise.all(
           cacheNames.map((cacheName) => {
-            if (cacheName !== STATIC_CACHE && cacheName !== DYNAMIC_CACHE) {
+            if (cacheName !== STATIC_CACHE && cacheName !== DYNAMIC_CACHE && cacheName !== CRISIS_CACHE) {
               console.log('Service Worker: Deleting old cache', cacheName);
               return caches.delete(cacheName);
             }
@@ -118,15 +132,29 @@ self.addEventListener('fetch', (event) => {
   );
 });
 
-// Background sync for prayer requests (future enhancement)
+// Background sync for offline submissions
 self.addEventListener('sync', (event) => {
-  if (event.tag === 'prayer-request-sync') {
+  if (event.tag === 'sync-submissions') {
     event.waitUntil(
-      // Handle offline prayer requests when connection is restored
-      console.log('Service Worker: Syncing prayer requests')
+      syncOfflineSubmissions()
     );
   }
 });
+
+async function syncOfflineSubmissions() {
+  console.log('Service Worker: Syncing offline submissions');
+
+  try {
+    const clients = await self.clients.matchAll({ type: 'window' });
+    if (clients.length > 0) {
+      clients[0].postMessage({
+        type: 'SYNC_SUBMISSIONS'
+      });
+    }
+  } catch (error) {
+    console.error('Service Worker: Failed to sync submissions', error);
+  }
+}
 
 // Push notifications (future enhancement)
 self.addEventListener('push', (event) => {
@@ -167,6 +195,29 @@ self.addEventListener('notificationclick', (event) => {
     const url = event.notification.data?.url || '/';
     event.waitUntil(
       clients.openWindow(url)
+    );
+  }
+});
+
+// Handle messages from client for caching
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'CACHE_URLS') {
+    const urls = event.data.urls || [];
+    const cacheName = event.data.cacheName || DYNAMIC_CACHE;
+
+    event.waitUntil(
+      caches.open(cacheName)
+        .then((cache) => {
+          console.log('Service Worker: Caching requested URLs', urls);
+          return cache.addAll(urls);
+        })
+        .then(() => {
+          event.ports[0].postMessage({ success: true });
+        })
+        .catch((error) => {
+          console.error('Service Worker: Failed to cache URLs', error);
+          event.ports[0].postMessage({ success: false, error: error.message });
+        })
     );
   }
 });

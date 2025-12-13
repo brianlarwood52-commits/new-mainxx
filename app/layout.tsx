@@ -4,6 +4,7 @@ import Navigation from '../src/components/Navigation'
 import Footer from '../src/components/Footer'
 import VideoBackground from '../src/components/VideoBackground'
 import PWAWrapper from '../src/components/PWAWrapper'
+import OfflineStatus from '../src/components/OfflineStatus'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -121,6 +122,7 @@ export default function RootLayout({
       </head>
       <body>
         <VideoBackground />
+        <OfflineStatus />
         <div className="relative z-10">
           <Navigation />
           <main>{children}</main>

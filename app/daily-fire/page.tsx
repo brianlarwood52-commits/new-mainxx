@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Calendar, Heart, Sunrise, BookOpen, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
 import Link from 'next/link';
 import { getTodaysDevotional, getRecentDevotionals, getAllCategories, devotionals } from '../../src/data/dailyFireDevotionals';
+import OfflineDownload from '../../src/components/OfflineDownload';
 
 export default function DailyFirePage() {
   const [showAllDevotionals, setShowAllDevotionals] = useState(false);
@@ -42,6 +43,14 @@ export default function DailyFirePage() {
           </p>
           <div className="mt-8 bg-white dark:bg-gray-800 rounded-xl p-4 shadow-lg">
             <p className="text-flame-600 dark:text-flame-400 font-medium">{todaysDate}</p>
+          </div>
+          <div className="mt-6 flex justify-center">
+            <OfflineDownload
+              contentId="all-devotionals"
+              contentType="devotional"
+              contentTitle="All Daily Fire Devotionals"
+              contentData={devotionals}
+            />
           </div>
         </div>
       </section>

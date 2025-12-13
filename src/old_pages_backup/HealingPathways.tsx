@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { BookOpen, Heart, Shield, Sunrise, ArrowRight, Users, Clock, Star } from 'lucide-react';
 import { healingPathways } from '../data/healingPathways';
+import OfflineDownload from '../components/OfflineDownload';
 
 const HealingPathways = () => {
   const getIconComponent = (iconName: string) => {
@@ -142,11 +143,20 @@ const HealingPathways = () => {
                     
                     <Link
                       href={`/healing-pathways/${pathway.id}`}
-                      className="w-full bg-flame-600 hover:bg-flame-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center group"
+                      className="w-full bg-flame-600 hover:bg-flame-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center group mb-3"
                     >
                       Start This Pathway
                       <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
                     </Link>
+
+                    <div className="flex justify-center">
+                      <OfflineDownload
+                        contentId={`pathway-${pathway.id}`}
+                        contentType="pathway"
+                        contentTitle={pathway.title}
+                        contentData={pathway}
+                      />
+                    </div>
                   </div>
                 </div>
               );
