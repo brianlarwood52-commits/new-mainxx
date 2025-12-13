@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
-import { Calendar, Heart, Sunrise, BookOpen, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
+import { Calendar, Heart, Sunrise, BookOpen, ArrowRight, ChevronDown, ChevronUp, Download } from 'lucide-react';
 import Link from 'next/link';
 import { getTodaysDevotional, getRecentDevotionals, getAllCategories, devotionals } from '../../src/data/dailyFireDevotionals';
 import OfflineDownload from '../../src/components/OfflineDownload';
@@ -43,14 +43,6 @@ export default function DailyFirePage() {
           </p>
           <div className="mt-8 bg-white dark:bg-gray-800 rounded-xl p-4 shadow-lg">
             <p className="text-flame-600 dark:text-flame-400 font-medium">{todaysDate}</p>
-          </div>
-          <div className="mt-6 flex justify-center">
-            <OfflineDownload
-              contentId="all-devotionals"
-              contentType="devotional"
-              contentTitle="All Daily Fire Devotionals"
-              contentData={devotionals}
-            />
           </div>
         </div>
       </section>
@@ -198,6 +190,29 @@ export default function DailyFirePage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-white dark:bg-gray-900">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="bg-gradient-to-br from-orange-50 to-flame-50 dark:from-orange-900/30 dark:to-flame-900/30 rounded-2xl p-8 border-2 border-orange-200 dark:border-orange-800">
+            <Download className="h-12 w-12 text-orange-600 dark:text-orange-400 mx-auto mb-6" />
+            <h2 className="font-serif text-3xl font-bold text-gray-800 dark:text-white mb-4">
+              Take All Devotionals Offline
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+              Download all {devotionals.length} Daily Fire devotionals to access them anytime, even without internet.
+              Perfect for when you&apos;re traveling or need encouragement on the go.
+            </p>
+            <div className="flex justify-center">
+              <OfflineDownload
+                contentId="all-devotionals"
+                contentType="devotional"
+                contentTitle="All Daily Fire Devotionals"
+                contentData={devotionals}
+              />
+            </div>
           </div>
         </div>
       </section>

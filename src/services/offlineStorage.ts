@@ -22,41 +22,73 @@ class OfflineStorageService {
   private db: IDBDatabase | null = null;
 
   async init(): Promise<void> {
+    if (this.db) return;
+
     return new Promise((resolve, reject) => {
-      const request = indexedDB.open(DB_NAME, DB_VERSION);
+      try {
+        const request = indexedDB.open(DB_NAME, DB_VERSION);
 
-      request.onerror = () => reject(request.error);
-      request.onsuccess = () => {
-        this.db = request.result;
-        resolve();
-      };
+        request.onerror = () => {
+          console.error('IndexedDB error:', request.error);
+          reject(new Error(`Failed to open database: ${request.error?.message || 'Unknown error'}`));
+        };
 
-      request.onupgradeneeded = (event) => {
-        const db = (event.target as IDBOpenDBRequest).result;
+        request.onsuccess = () => {
+          this.db = request.result;
+          console.log('IndexedDB initialized successfully');
+          resolve();
+        };
 
-        if (!db.objectStoreNames.contains(CONTENT_STORE)) {
-          const contentStore = db.createObjectStore(CONTENT_STORE, { keyPath: 'id' });
-          contentStore.createIndex('type', 'type', { unique: false });
-        }
+        request.onupgradeneeded = (event) => {
+          const db = (event.target as IDBOpenDBRequest).result;
+          console.log('Upgrading IndexedDB schema');
 
-        if (!db.objectStoreNames.contains(SUBMISSIONS_STORE)) {
-          db.createObjectStore(SUBMISSIONS_STORE, { keyPath: 'id' });
-        }
-      };
+          if (!db.objectStoreNames.contains(CONTENT_STORE)) {
+            const contentStore = db.createObjectStore(CONTENT_STORE, { keyPath: 'id' });
+            contentStore.createIndex('type', 'type', { unique: false });
+            console.log('Created content store');
+          }
+
+          if (!db.objectStoreNames.contains(SUBMISSIONS_STORE)) {
+            db.createObjectStore(SUBMISSIONS_STORE, { keyPath: 'id' });
+            console.log('Created submissions store');
+          }
+        };
+      } catch (error) {
+        console.error('Error initializing IndexedDB:', error);
+        reject(error);
+      }
     });
   }
 
   async saveContent(content: OfflineContent): Promise<void> {
-    if (!this.db) await this.init();
+    try {
+      if (!this.db) await this.init();
 
-    return new Promise((resolve, reject) => {
-      const transaction = this.db!.transaction([CONTENT_STORE], 'readwrite');
-      const store = transaction.objectStore(CONTENT_STORE);
-      const request = store.put(content);
+      return new Promise((resolve, reject) => {
+        const transaction = this.db!.transaction([CONTENT_STORE], 'readwrite');
+        const store = transaction.objectStore(CONTENT_STORE);
+        const request = store.put(content);
 
-      request.onerror = () => reject(request.error);
-      request.onsuccess = () => resolve();
-    });
+        request.onerror = () => {
+          console.error('Error saving content to IndexedDB:', request.error);
+          reject(new Error(`Failed to save content: ${request.error?.message || 'Unknown error'}`));
+        };
+
+        request.onsuccess = () => {
+          console.log('Content saved successfully:', content.id);
+          resolve();
+        };
+
+        transaction.onerror = () => {
+          console.error('Transaction error:', transaction.error);
+          reject(new Error(`Transaction failed: ${transaction.error?.message || 'Unknown error'}`));
+        };
+      });
+    } catch (error) {
+      console.error('Error in saveContent:', error);
+      throw error;
+    }
   }
 
   async getContent(id: string): Promise<OfflineContent | null> {

@@ -52,8 +52,14 @@ export default function OfflineDownload({
   };
 
   const handleDownload = async () => {
+    if (!('indexedDB' in window)) {
+      showToast('Your browser does not support offline storage', 'error');
+      return;
+    }
+
     setIsLoading(true);
     try {
+      console.log('Starting download for:', contentId, contentTitle);
       await offlineStorage.saveContent({
         id: contentId,
         type: contentType,
@@ -62,14 +68,18 @@ export default function OfflineDownload({
         cachedAt: Date.now(),
       });
 
+      console.log('Download complete for:', contentId);
       setIsDownloaded(true);
       await updateStorageSize();
-      showToast('Content saved for offline viewing!', 'success');
+
+      const itemCount = Array.isArray(contentData) ? contentData.length : 1;
+      showToast(`${itemCount} ${contentType}${itemCount > 1 ? 's' : ''} saved for offline viewing!`, 'success');
 
       if (onDownload) onDownload();
     } catch (error) {
       console.error('Error downloading content:', error);
-      showToast('Failed to download content for offline use', 'error');
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      showToast(`Failed to download: ${errorMessage}`, 'error');
     } finally {
       setIsLoading(false);
     }
