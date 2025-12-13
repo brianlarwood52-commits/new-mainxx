@@ -7,6 +7,10 @@ class BibleStorageService {
   private db: IDBDatabase | null = null;
 
   async init(): Promise<void> {
+    if (typeof window === 'undefined' || typeof indexedDB === 'undefined') {
+      return Promise.resolve();
+    }
+
     return new Promise((resolve, reject) => {
       const request = indexedDB.open(DB_NAME, DB_VERSION);
 
@@ -67,6 +71,7 @@ class BibleStorageService {
 
   async saveVerses(verses: BibleVerse[]): Promise<void> {
     if (!this.db) await this.init();
+    if (!this.db) return;
     const transaction = this.db!.transaction(['verses'], 'readwrite');
     const store = transaction.objectStore('verses');
 
@@ -82,6 +87,7 @@ class BibleStorageService {
 
   async getVersesByChapter(bookId: number, chapter: number): Promise<BibleVerse[]> {
     if (!this.db) await this.init();
+    if (!this.db) return [];
     return new Promise((resolve, reject) => {
       const transaction = this.db!.transaction(['verses'], 'readonly');
       const store = transaction.objectStore('verses');
@@ -95,6 +101,7 @@ class BibleStorageService {
 
   async getVerse(verseKey: string): Promise<BibleVerse | null> {
     if (!this.db) await this.init();
+    if (!this.db) return null;
     return new Promise((resolve, reject) => {
       const transaction = this.db!.transaction(['verses'], 'readonly');
       const store = transaction.objectStore('verses');
@@ -107,6 +114,7 @@ class BibleStorageService {
 
   async searchVerses(query: string, bookId?: number): Promise<BibleVerse[]> {
     if (!this.db) await this.init();
+    if (!this.db) return [];
     return new Promise((resolve, reject) => {
       const transaction = this.db!.transaction(['verses'], 'readonly');
       const store = transaction.objectStore('verses');
@@ -128,6 +136,7 @@ class BibleStorageService {
 
   async saveCrossReferences(refs: CrossReference[]): Promise<void> {
     if (!this.db) await this.init();
+    if (!this.db) return;
     const transaction = this.db!.transaction(['crossReferences'], 'readwrite');
     const store = transaction.objectStore('crossReferences');
 
@@ -143,6 +152,7 @@ class BibleStorageService {
 
   async getCrossReferences(verseKey: string): Promise<CrossReference[]> {
     if (!this.db) await this.init();
+    if (!this.db) return [];
     return new Promise((resolve, reject) => {
       const transaction = this.db!.transaction(['crossReferences'], 'readonly');
       const store = transaction.objectStore('crossReferences');
@@ -156,6 +166,7 @@ class BibleStorageService {
 
   async saveHighlight(highlight: UserHighlight): Promise<void> {
     if (!this.db) await this.init();
+    if (!this.db) return;
     const transaction = this.db!.transaction(['highlights'], 'readwrite');
     const store = transaction.objectStore('highlights');
     store.put(highlight);
@@ -168,6 +179,7 @@ class BibleStorageService {
 
   async getHighlightsByVerseKey(verseKey: string): Promise<UserHighlight | null> {
     if (!this.db) await this.init();
+    if (!this.db) return null;
     return new Promise((resolve, reject) => {
       const transaction = this.db!.transaction(['highlights'], 'readonly');
       const store = transaction.objectStore('highlights');
@@ -181,6 +193,7 @@ class BibleStorageService {
 
   async getAllHighlights(): Promise<UserHighlight[]> {
     if (!this.db) await this.init();
+    if (!this.db) return [];
     return new Promise((resolve, reject) => {
       const transaction = this.db!.transaction(['highlights'], 'readonly');
       const store = transaction.objectStore('highlights');
@@ -193,6 +206,7 @@ class BibleStorageService {
 
   async deleteHighlight(id: string): Promise<void> {
     if (!this.db) await this.init();
+    if (!this.db) return;
     const transaction = this.db!.transaction(['highlights'], 'readwrite');
     const store = transaction.objectStore('highlights');
     store.delete(id);
@@ -205,6 +219,7 @@ class BibleStorageService {
 
   async saveNote(note: UserNote): Promise<void> {
     if (!this.db) await this.init();
+    if (!this.db) return;
     const transaction = this.db!.transaction(['notes'], 'readwrite');
     const store = transaction.objectStore('notes');
     store.put(note);
@@ -217,6 +232,7 @@ class BibleStorageService {
 
   async getAllNotes(): Promise<UserNote[]> {
     if (!this.db) await this.init();
+    if (!this.db) return [];
     return new Promise((resolve, reject) => {
       const transaction = this.db!.transaction(['notes'], 'readonly');
       const store = transaction.objectStore('notes');
@@ -229,6 +245,7 @@ class BibleStorageService {
 
   async getNotesByVerseKey(verseKey: string): Promise<UserNote[]> {
     if (!this.db) await this.init();
+    if (!this.db) return [];
     return new Promise((resolve, reject) => {
       const transaction = this.db!.transaction(['notes'], 'readonly');
       const store = transaction.objectStore('notes');
@@ -242,6 +259,7 @@ class BibleStorageService {
 
   async deleteNote(id: string): Promise<void> {
     if (!this.db) await this.init();
+    if (!this.db) return;
     const transaction = this.db!.transaction(['notes'], 'readwrite');
     const store = transaction.objectStore('notes');
     store.delete(id);
@@ -254,6 +272,7 @@ class BibleStorageService {
 
   async saveBookmark(bookmark: UserBookmark): Promise<void> {
     if (!this.db) await this.init();
+    if (!this.db) return;
     const transaction = this.db!.transaction(['bookmarks'], 'readwrite');
     const store = transaction.objectStore('bookmarks');
     store.put(bookmark);
@@ -266,6 +285,7 @@ class BibleStorageService {
 
   async getAllBookmarks(): Promise<UserBookmark[]> {
     if (!this.db) await this.init();
+    if (!this.db) return [];
     return new Promise((resolve, reject) => {
       const transaction = this.db!.transaction(['bookmarks'], 'readonly');
       const store = transaction.objectStore('bookmarks');
@@ -282,6 +302,7 @@ class BibleStorageService {
 
   async deleteBookmark(id: string): Promise<void> {
     if (!this.db) await this.init();
+    if (!this.db) return;
     const transaction = this.db!.transaction(['bookmarks'], 'readwrite');
     const store = transaction.objectStore('bookmarks');
     store.delete(id);
@@ -294,6 +315,7 @@ class BibleStorageService {
 
   async addToHistory(entry: ReadingHistoryEntry): Promise<void> {
     if (!this.db) await this.init();
+    if (!this.db) return;
     const transaction = this.db!.transaction(['history'], 'readwrite');
     const store = transaction.objectStore('history');
     store.put(entry);
@@ -321,6 +343,7 @@ class BibleStorageService {
 
   async getHistory(limit: number = 20): Promise<ReadingHistoryEntry[]> {
     if (!this.db) await this.init();
+    if (!this.db) return [];
     return new Promise((resolve, reject) => {
       const transaction = this.db!.transaction(['history'], 'readonly');
       const store = transaction.objectStore('history');
@@ -343,6 +366,7 @@ class BibleStorageService {
 
   async saveCollection(collection: StudyCollection): Promise<void> {
     if (!this.db) await this.init();
+    if (!this.db) return;
     const transaction = this.db!.transaction(['collections'], 'readwrite');
     const store = transaction.objectStore('collections');
     store.put(collection);
@@ -355,6 +379,7 @@ class BibleStorageService {
 
   async getAllCollections(): Promise<StudyCollection[]> {
     if (!this.db) await this.init();
+    if (!this.db) return [];
     return new Promise((resolve, reject) => {
       const transaction = this.db!.transaction(['collections'], 'readonly');
       const store = transaction.objectStore('collections');
@@ -367,6 +392,7 @@ class BibleStorageService {
 
   async deleteCollection(id: string): Promise<void> {
     if (!this.db) await this.init();
+    if (!this.db) return;
     const transaction = this.db!.transaction(['collections'], 'readwrite');
     const store = transaction.objectStore('collections');
     store.delete(id);
@@ -379,6 +405,7 @@ class BibleStorageService {
 
   async savePreferences(preferences: UserPreferences): Promise<void> {
     if (!this.db) await this.init();
+    if (!this.db) return;
     const transaction = this.db!.transaction(['preferences'], 'readwrite');
     const store = transaction.objectStore('preferences');
     store.put(preferences);
@@ -391,6 +418,7 @@ class BibleStorageService {
 
   async getPreferences(userId: string): Promise<UserPreferences | null> {
     if (!this.db) await this.init();
+    if (!this.db) return null;
     return new Promise((resolve, reject) => {
       const transaction = this.db!.transaction(['preferences'], 'readonly');
       const store = transaction.objectStore('preferences');
