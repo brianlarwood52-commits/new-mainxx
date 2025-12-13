@@ -1,13 +1,27 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { Calendar, Heart, Sunrise, BookOpen, ArrowRight, ChevronDown, ChevronUp, Download } from 'lucide-react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { getTodaysDevotional, getRecentDevotionals, getAllCategories, devotionals } from '../../src/data/dailyFireDevotionals';
 import OfflineDownload from '../../src/components/OfflineDownload';
 
-export default function DailyFirePage() {
+function DailyFireContent() {
+  const searchParams = useSearchParams();
   const [showAllDevotionals, setShowAllDevotionals] = useState(false);
+
+  useEffect(() => {
+    if (searchParams.get('showAll') === 'true') {
+      setShowAllDevotionals(true);
+      setTimeout(() => {
+        const element = document.getElementById('all-devotionals');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [searchParams]);
 
   const todaysDate = new Date().toLocaleDateString('en-US', {
     weekday: 'long',
@@ -104,7 +118,7 @@ export default function DailyFirePage() {
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-r from-sky-50 to-flame-50 dark:from-sky-900/30 dark:to-flame-900/30">
+      <section id="all-devotionals" className="py-16 bg-gradient-to-r from-sky-50 to-flame-50 dark:from-sky-900/30 dark:to-flame-900/30">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-12 text-center">
             Recent Daily Fires
@@ -274,5 +288,20 @@ export default function DailyFirePage() {
         </div>
       </section>
     </div>
+  );
+}
+
+export default function DailyFirePage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-flame-50 via-orange-50 to-yellow-50 dark:from-flame-900/30 dark:via-orange-900/30 dark:to-yellow-900/30">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-flame-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-700 dark:text-gray-300">Loading...</p>
+        </div>
+      </div>
+    }>
+      <DailyFireContent />
+    </Suspense>
   );
 }

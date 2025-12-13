@@ -110,7 +110,7 @@ export default function SettingsContent() {
 
   const getContentUrl = (type: string, id: string) => {
     if (id === 'all-devotionals') {
-      return '/daily-fire';
+      return '/daily-fire?showAll=true';
     }
 
     switch (type) {
