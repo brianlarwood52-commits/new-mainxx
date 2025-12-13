@@ -56,9 +56,17 @@ export default function DailyFirePage() {
               </div>
             </div>
 
-            <h2 className="font-serif text-3xl font-bold text-gray-800 dark:text-white mb-4 text-center">
-              Today&apos;s Fire
-            </h2>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="font-serif text-3xl font-bold text-gray-800 dark:text-white text-center flex-1">
+                Today&apos;s Fire
+              </h2>
+              <OfflineDownload
+                contentId={todaysDevotional.id.toString()}
+                contentType="devotional"
+                contentTitle={todaysDevotional.title}
+                contentData={todaysDevotional}
+              />
+            </div>
 
             <article className="prose prose-lg max-w-none">
               <h3 className="font-serif text-2xl font-semibold text-flame-700 dark:text-flame-300 mb-4">
