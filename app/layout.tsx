@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import Navigation from '../src/components/Navigation'
 import Footer from '../src/components/Footer'
-import OutbackBackground from '../src/components/OutbackBackground'
+import VideoBackground from '../src/components/VideoBackground'
 import PWAWrapper from '../src/components/PWAWrapper'
 import OfflineStatus from '../src/components/OfflineStatus'
 import Providers from '../src/components/Providers'
@@ -12,61 +12,61 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: '#c2410c',
+  themeColor: '#ea580c',
 }
 
 
 export const metadata: Metadata = {
   title: {
-    default: 'Running to God - A Journey of Faith Through the Australian Outback',
-    template: '%s | Running to God',
+    default: 'Shame to Flame - From Darkness to Light',
+    template: '%s | Shame to Flame Ministry',
   },
-  description: 'An Australian outback road trip journey from Perth to Port Lincoln, exploring faith, purpose, and the spiritual journey of running from ourselves into the arms of God.',
-  keywords: ['Christian faith', 'Australian outback', 'spiritual journey', 'Bible study', 'road trip', 'camping', 'devotionals', 'finding God', 'Perth to Port Lincoln', 'bush tucker', 'faith adventure'],
-  authors: [{ name: 'Running to God Ministry' }],
-  creator: 'Running to God Ministry',
-  applicationName: 'Running to God',
+  description: 'A Christian ministry guiding you from shame, guilt, and grief toward renewed hope, faith, and purpose through God\'s love and grace.',
+  keywords: ['Christian ministry', 'healing from shame', 'trauma recovery', 'biblical guidance', 'prayer support', 'spiritual healing', 'grief support', 'faith-based counseling'],
+  authors: [{ name: 'Shame to Flame Ministry' }],
+  creator: 'Shame to Flame Ministry',
+  applicationName: 'Shame to Flame Ministry',
   appleWebApp: {
     capable: true,
-    title: 'Running to God',
+    title: 'Shame to Flame',
     statusBarStyle: 'default',
   },
   formatDetection: {
     telephone: false,
   },
-  publisher: 'Running to God Ministry',
+  publisher: 'Shame to Flame Ministry',
   icons: {
-    icon: '/running-to-god-icon.svg',
+    icon: '/flame-icon.svg',
     apple: [
-      { url: '/running-to-god-icon.svg', sizes: '180x180', type: 'image/svg+xml' },
-      { url: '/running-to-god-icon.svg' },
+      { url: '/apple-touch-icon.svg', sizes: '180x180', type: 'image/svg+xml' },
+      { url: '/flame-icon.svg' },
     ],
   },
   manifest: '/manifest.json',
-  metadataBase: new URL('https://runningtogod.faith'),
+  metadataBase: new URL('https://shametoflame.faith'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: 'website',
-    locale: 'en_AU',
-    url: 'https://runningtogod.faith',
-    siteName: 'Running to God',
-    title: 'Running to God - A Journey of Faith Through the Australian Outback',
-    description: 'An Australian outback road trip journey exploring faith, purpose, and the spiritual journey of running from ourselves into the arms of God.',
+    locale: 'en_US',
+    url: 'https://shametoflame.faith',
+    siteName: 'Shame to Flame Ministry',
+    title: 'Shame to Flame - From Darkness to Light',
+    description: 'A Christian ministry guiding you from shame, guilt, and grief toward renewed hope, faith, and purpose through God\'s love and grace.',
     images: [
       {
-        url: '/running-to-god-icon.svg',
+        url: '/flame-icon.svg',
         width: 800,
         height: 800,
-        alt: 'Running to God - Road stretching toward the horizon with cross',
+        alt: 'Shame to Flame Ministry Logo',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Running to God - A Journey of Faith',
-    description: 'An Australian outback road trip exploring faith and the spiritual journey to God.',
+    title: 'Shame to Flame - From Darkness to Light',
+    description: 'A Christian ministry guiding you from shame, guilt, and grief toward renewed hope, faith, and purpose.',
   },
   robots: {
     index: true,
@@ -95,9 +95,9 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Running to God" />
-        <link rel="apple-touch-icon" href="/running-to-god-icon.svg" />
-        <meta name="theme-color" content="#c2410c" />
+        <meta name="apple-mobile-web-app-title" content="Shame to Flame" />
+        <link rel="apple-touch-icon" href="/flame-icon.svg" />
+        <meta name="theme-color" content="#ea580c" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -107,15 +107,15 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              "name": "Running to God Ministry",
-              "url": "https://runningtogod.faith",
-              "logo": "https://runningtogod.faith/running-to-god-icon.svg",
-              "description": "A Christian ministry sharing faith through stories of an Australian outback road trip journey, exploring how we can run from ourselves and into the loving arms of God.",
+              "name": "Shame to Flame Ministry",
+              "url": "https://shametoflame.faith",
+              "logo": "https://shametoflame.faith/flame-icon.svg",
+              "description": "A Christian ministry providing trauma-informed support, biblical guidance, and healing resources for individuals recovering from shame, grief, and spiritual wounds.",
               "sameAs": [],
               "contactPoint": {
                 "@type": "ContactPoint",
                 "contactType": "Ministry Support",
-                "email": "contact@runningtogod.faith"
+                "email": "contact@shametoflame.faith"
               }
             })
           }}
@@ -123,7 +123,7 @@ export default function RootLayout({
       </head>
       <body>
         <Providers>
-          <OutbackBackground />
+          <VideoBackground />
           <OfflineStatus />
           <div className="relative z-10">
             <Navigation />

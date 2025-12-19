@@ -36,8 +36,8 @@
   }
 }
 
-/* Australian Outback Sunset Background */
-@keyframes sunset-shift {
+/* Animated background styles */
+@keyframes gradient-shift {
   0% {
     background-position: 0% 50%;
   }
@@ -49,40 +49,13 @@
   }
 }
 
-.animate-sunset-shift {
-  background: linear-gradient(-45deg, #0c4a6e, #0369a1, #f97316, #c2410c, #7c2d12, #3e1810);
+.animate-gradient-shift {
+  background: linear-gradient(-45deg, #0c4a6e, #7c2d12, #581c87, #ea580c, #0369a1, #c2410c);
   background-size: 400% 400%;
-  animation: sunset-shift 20s ease infinite;
+  animation: gradient-shift 15s ease infinite;
 }
 
-/* Desert dust animation */
-@keyframes dust-particles {
-  0% {
-    transform: translateX(-100px) translateY(0);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.3;
-  }
-  90% {
-    opacity: 0.3;
-  }
-  100% {
-    transform: translateX(100vw) translateY(-50px);
-    opacity: 0;
-  }
-}
-
-.dust-particle {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: rgba(180, 83, 9, 0.4);
-  border-radius: 50%;
-  animation: dust-particles 15s linear infinite;
-}
-
-/* Animated stars for night sky */
+/* Animated stars */
 .stars {
   width: 1px;
   height: 1px;
@@ -92,9 +65,7 @@
     1067px 1221px #fff, 1756px 1682px #fff, 1614px 1503px #fff, 1295px 1696px #fff,
     1502px 1593px #fff, 1076px 1710px #fff, 1230px 1421px #fff, 1733px 1258px #fff,
     1314px 1301px #fff, 1850px 1219px #fff, 1638px 1175px #fff, 1695px 1449px #fff,
-    1564px 1515px #fff, 1479px 1535px #fff, 1307px 1709px #fff, 1223px 1686px #fff,
-    200px 300px #fff, 400px 150px #fff, 600px 400px #fff, 800px 200px #fff,
-    350px 500px #fff, 550px 350px #fff, 750px 550px #fff, 950px 300px #fff;
+    1564px 1515px #fff, 1479px 1535px #fff, 1307px 1709px #fff, 1223px 1686px #fff;
   animation: animStar 50s linear infinite;
 }
 
@@ -110,8 +81,7 @@
     1067px 1221px #fff, 1756px 1682px #fff, 1614px 1503px #fff, 1295px 1696px #fff,
     1502px 1593px #fff, 1076px 1710px #fff, 1230px 1421px #fff, 1733px 1258px #fff,
     1314px 1301px #fff, 1850px 1219px #fff, 1638px 1175px #fff, 1695px 1449px #fff,
-    1564px 1515px #fff, 1479px 1535px #fff, 1307px 1709px #fff, 1223px 1686px #fff,
-    200px 300px #fff, 400px 150px #fff, 600px 400px #fff, 800px 200px #fff;
+    1564px 1515px #fff, 1479px 1535px #fff, 1307px 1709px #fff, 1223px 1686px #fff;
 }
 
 .stars2 {
@@ -121,8 +91,7 @@
   box-shadow: 
     790px 1280px #fff, 1446px 906px #fff, 1081px 1280px #fff, 1597px 1048px #fff,
     1067px 1221px #fff, 1756px 1682px #fff, 1614px 1503px #fff, 1295px 1696px #fff,
-    1502px 1593px #fff, 1076px 1710px #fff, 1230px 1421px #fff, 1733px 1258px #fff,
-    120px 200px #fff, 320px 80px #fff, 520px 280px #fff, 720px 120px #fff;
+    1502px 1593px #fff, 1076px 1710px #fff, 1230px 1421px #fff, 1733px 1258px #fff;
   animation: animStar 100s linear infinite;
 }
 
@@ -145,8 +114,7 @@
   background: transparent;
   box-shadow: 
     1541px 1046px #fff, 1446px 906px #fff, 1081px 1280px #fff, 1597px 1048px #fff,
-    1067px 1221px #fff, 1756px 1682px #fff, 1614px 1503px #fff, 1295px 1696px #fff,
-    250px 150px #fff, 450px 250px #fff, 650px 100px #fff, 850px 350px #fff;
+    1067px 1221px #fff, 1756px 1682px #fff, 1614px 1503px #fff, 1295px 1696px #fff;
   animation: animStar 150s linear infinite;
 }
 
@@ -169,126 +137,4 @@
   to {
     transform: translateY(-2000px);
   }
-}
-
-/* Campfire glow effect */
-@keyframes campfire-flicker {
-  0%, 100% {
-    box-shadow: 
-      0 0 20px 10px rgba(255, 127, 17, 0.4),
-      0 0 40px 20px rgba(255, 127, 17, 0.2),
-      0 0 60px 30px rgba(255, 127, 17, 0.1);
-    transform: scale(1);
-  }
-  25% {
-    box-shadow: 
-      0 0 25px 12px rgba(255, 127, 17, 0.5),
-      0 0 50px 25px rgba(255, 127, 17, 0.25),
-      0 0 75px 35px rgba(255, 127, 17, 0.12);
-    transform: scale(1.02);
-  }
-  50% {
-    box-shadow: 
-      0 0 18px 8px rgba(255, 127, 17, 0.35),
-      0 0 35px 18px rgba(255, 127, 17, 0.18),
-      0 0 55px 28px rgba(255, 127, 17, 0.08);
-    transform: scale(0.98);
-  }
-  75% {
-    box-shadow: 
-      0 0 22px 11px rgba(255, 127, 17, 0.45),
-      0 0 45px 22px rgba(255, 127, 17, 0.22),
-      0 0 65px 32px rgba(255, 127, 17, 0.11);
-    transform: scale(1.01);
-  }
-}
-
-.campfire-glow {
-  animation: campfire-flicker 3s ease-in-out infinite;
-}
-
-/* Road stretching to horizon effect */
-.road-horizon {
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(55, 65, 81, 0.8) 40%,
-    rgba(31, 41, 55, 1) 100%
-  );
-  clip-path: polygon(40% 100%, 60% 100%, 52% 0%, 48% 0%);
-}
-
-/* Ocean wave animation */
-@keyframes ocean-wave {
-  0%, 100% {
-    transform: translateX(0) translateY(0);
-  }
-  25% {
-    transform: translateX(-10px) translateY(-5px);
-  }
-  50% {
-    transform: translateX(0) translateY(-10px);
-  }
-  75% {
-    transform: translateX(10px) translateY(-5px);
-  }
-}
-
-.ocean-wave {
-  animation: ocean-wave 8s ease-in-out infinite;
-}
-
-/* Southern Cross constellation */
-.southern-cross {
-  position: relative;
-}
-
-.southern-cross::before {
-  content: '';
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: #fff;
-  border-radius: 50%;
-  box-shadow: 
-    0 0 10px 2px rgba(255, 255, 255, 0.8),
-    30px 20px 0 0 #fff,
-    30px 20px 10px 2px rgba(255, 255, 255, 0.8),
-    15px 45px 0 0 #fff,
-    15px 45px 10px 2px rgba(255, 255, 255, 0.8),
-    45px 45px 0 0 #fff,
-    45px 45px 10px 2px rgba(255, 255, 255, 0.8),
-    25px 70px 0 0 #fff,
-    25px 70px 10px 2px rgba(255, 255, 255, 0.8);
-}
-
-/* Scroll indicator for journey pages */
-@keyframes scroll-hint {
-  0%, 100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(10px);
-    opacity: 0.5;
-  }
-}
-
-.scroll-hint {
-  animation: scroll-hint 2s ease-in-out infinite;
-}
-
-/* Red earth texture overlay */
-.red-earth-texture {
-  background-image: 
-    radial-gradient(circle at 20% 80%, rgba(180, 83, 9, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(194, 65, 12, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(124, 45, 18, 0.05) 0%, transparent 30%);
-}
-
-/* Bush/eucalyptus pattern */
-.bush-pattern {
-  background-image: 
-    radial-gradient(ellipse at 10% 90%, rgba(79, 148, 88, 0.1) 0%, transparent 40%),
-    radial-gradient(ellipse at 90% 70%, rgba(51, 95, 57, 0.08) 0%, transparent 35%);
 }

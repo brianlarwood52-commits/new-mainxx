@@ -1,18 +1,18 @@
 {
-  "name": "Running to God - A Journey of Faith",
-  "short_name": "Running to God",
-  "description": "An Australian outback road trip journey exploring faith, purpose, and running into the arms of God. Based on a 2024 adventure from Perth to Port Lincoln.",
+  "name": "Shame to Flame - Christian Healing Ministry",
+  "short_name": "Shame to Flame",
+  "description": "A safe place for healing and hope. Transform your shame into flame through God's love and grace.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1a1410",
-  "theme_color": "#c2410c",
+  "background_color": "#ffffff",
+  "theme_color": "#ea580c",
   "orientation": "portrait-primary",
   "scope": "/",
-  "lang": "en-AU",
-  "categories": ["lifestyle", "religion", "education", "travel"],
+  "lang": "en-US",
+  "categories": ["lifestyle", "health", "education"],
   "icons": [
     {
-      "src": "/running-to-god-icon.svg",
+      "src": "/flame-icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
@@ -20,49 +20,49 @@
   ],
   "shortcuts": [
     {
-      "name": "The Journey",
-      "short_name": "Journey",
-      "description": "Road trip stories from Perth to Port Lincoln",
-      "url": "/journey",
+      "name": "Daily Fire",
+      "short_name": "Daily Fire",
+      "description": "Daily encouragements and devotionals",
+      "url": "/daily-fire",
       "icons": [
         {
-          "src": "/running-to-god-icon.svg",
+          "src": "/flame-icon.svg",
           "sizes": "96x96"
         }
       ]
     },
     {
-      "name": "Campfire Devotions",
-      "short_name": "Campfire",
-      "description": "Evening devotionals under the stars",
-      "url": "/campfire-devotions",
+      "name": "Healing Pathways",
+      "short_name": "Healing",
+      "description": "Guided healing resources",
+      "url": "/healing-pathways",
       "icons": [
         {
-          "src": "/running-to-god-icon.svg",
+          "src": "/flame-icon.svg",
           "sizes": "96x96"
         }
       ]
     },
     {
-      "name": "Bible Studies",
-      "short_name": "Bible",
-      "description": "Guided Bible study resources",
-      "url": "/bible-study",
-      "icons": [
-        {
-          "src": "/running-to-god-icon.svg",
-          "sizes": "96x96"
-        }
-      ]
-    },
-    {
-      "name": "Prayer Corner",
+      "name": "Prayer Rock",
       "short_name": "Prayer",
-      "description": "Share your prayers and reflections",
+      "description": "Prayer requests and reflections",
       "url": "/prayer-rock",
       "icons": [
         {
-          "src": "/running-to-god-icon.svg",
+          "src": "/flame-icon.svg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Contact Us",
+      "short_name": "Contact",
+      "description": "Get support and prayer",
+      "url": "/contact",
+      "icons": [
+        {
+          "src": "/flame-icon.svg",
           "sizes": "96x96"
         }
       ]
