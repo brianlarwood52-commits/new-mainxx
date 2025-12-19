@@ -2,351 +2,293 @@
 
 import React, { useState, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Flame, Menu, X, ChevronDown, Settings } from 'lucide-react'
+import { Menu, X, ChevronDown, Settings, Map, BookOpen, Flame, Users, Heart, MessageCircle } from 'lucide-react'
 import ThemeToggle from './ThemeToggle'
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false)
+  const [journeyDropdownOpen, setJourneyDropdownOpen] = useState(false)
   const [resourcesDropdownOpen, setResourcesDropdownOpen] = useState(false)
-  const [studyLibraryDropdownOpen, setStudyLibraryDropdownOpen] = useState(false)
-  const [prayerRockDropdownOpen, setPrayerRockDropdownOpen] = useState(false)
+  const [studyDropdownOpen, setStudyDropdownOpen] = useState(false)
+  const [prayerDropdownOpen, setPrayerDropdownOpen] = useState(false)
   const pathname = usePathname()
-  const aboutTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const journeyTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const resourcesTimeoutRef = useRef<NodeJS.Timeout | null>(null)
-  const studyLibraryTimeoutRef = useRef<NodeJS.Timeout | null>(null)
-  const prayerRockTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const studyTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const prayerTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-  const handleAboutMouseEnter = () => {
-    if (aboutTimeoutRef.current) {
-      clearTimeout(aboutTimeoutRef.current)
-    }
-    setAboutDropdownOpen(true)
+  const handleJourneyMouseEnter = () => {
+    if (journeyTimeoutRef.current) clearTimeout(journeyTimeoutRef.current)
+    setJourneyDropdownOpen(true)
   }
-
-  const handleAboutMouseLeave = () => {
-    aboutTimeoutRef.current = setTimeout(() => {
-      setAboutDropdownOpen(false)
-    }, 150)
+  const handleJourneyMouseLeave = () => {
+    journeyTimeoutRef.current = setTimeout(() => setJourneyDropdownOpen(false), 150)
   }
 
   const handleResourcesMouseEnter = () => {
-    if (resourcesTimeoutRef.current) {
-      clearTimeout(resourcesTimeoutRef.current)
-    }
+    if (resourcesTimeoutRef.current) clearTimeout(resourcesTimeoutRef.current)
     setResourcesDropdownOpen(true)
   }
-
   const handleResourcesMouseLeave = () => {
-    resourcesTimeoutRef.current = setTimeout(() => {
-      setResourcesDropdownOpen(false)
-    }, 150)
+    resourcesTimeoutRef.current = setTimeout(() => setResourcesDropdownOpen(false), 150)
   }
 
-  const handleStudyLibraryMouseEnter = () => {
-    if (studyLibraryTimeoutRef.current) {
-      clearTimeout(studyLibraryTimeoutRef.current)
-    }
-    setStudyLibraryDropdownOpen(true)
+  const handleStudyMouseEnter = () => {
+    if (studyTimeoutRef.current) clearTimeout(studyTimeoutRef.current)
+    setStudyDropdownOpen(true)
+  }
+  const handleStudyMouseLeave = () => {
+    studyTimeoutRef.current = setTimeout(() => setStudyDropdownOpen(false), 150)
   }
 
-  const handleStudyLibraryMouseLeave = () => {
-    studyLibraryTimeoutRef.current = setTimeout(() => {
-      setStudyLibraryDropdownOpen(false)
-    }, 150)
+  const handlePrayerMouseEnter = () => {
+    if (prayerTimeoutRef.current) clearTimeout(prayerTimeoutRef.current)
+    setPrayerDropdownOpen(true)
+  }
+  const handlePrayerMouseLeave = () => {
+    prayerTimeoutRef.current = setTimeout(() => setPrayerDropdownOpen(false), 150)
   }
 
-  const handlePrayerRockMouseEnter = () => {
-    if (prayerRockTimeoutRef.current) {
-      clearTimeout(prayerRockTimeoutRef.current)
-    }
-    setPrayerRockDropdownOpen(true)
-  }
-
-  const handlePrayerRockMouseLeave = () => {
-    prayerRockTimeoutRef.current = setTimeout(() => {
-      setPrayerRockDropdownOpen(false)
-    }, 150)
-  }
-
-  const navItems = [
-    { path: '/', label: 'Home' },
-    { path: '/contact', label: 'Contact Us' },
-  ]
-
-  const aboutItems = [
-    { path: '/my-story', label: 'My Story' },
-    { path: '/why-this-ministry', label: 'Why This Ministry' },
-    { path: '/about', label: 'About Us' },
+  const journeyItems = [
+    { path: '/journey', label: 'The Full Journey', icon: Map },
+    { path: '/my-story', label: 'My Story', icon: Heart },
+    { path: '/why-this-ministry', label: 'Why This Ministry', icon: Users },
+    { path: '/about', label: 'About Us', icon: Users },
   ]
 
   const resourceItems = [
-    { path: '/crisis-help', label: 'Crisis Help' },
-    { path: '/healing-pathways', label: 'Healing Pathways' },
-    { path: '/daily-fire', label: 'Daily Fire' },
-    { path: '/ministry-hub', label: 'Ministry Hub' },
+    { path: '/campfire-devotions', label: 'Campfire Devotions', icon: Flame },
+    { path: '/daily-fire', label: 'Daily Encouragement', icon: Flame },
+    { path: '/healing-pathways', label: 'Healing Pathways', icon: Heart },
+    { path: '/crisis-help', label: 'Crisis Help', icon: Heart },
   ]
 
-  const studyLibraryItems = [
-    { path: '/mary-magdalene-apologetic', label: 'Mary Magdalene Apologetic' },
-    { path: '/bible-study', label: 'Bible Study Hub' },
-    { path: '/sda-commentary-search', label: 'SDA Commentary' },
+  const studyItems = [
+    { path: '/bible-study', label: 'Bible Study Hub', icon: BookOpen },
+    { path: '/sda-commentary-search', label: 'Commentary Search', icon: BookOpen },
+    { path: '/mary-magdalene-apologetic', label: 'Mary Magdalene Study', icon: BookOpen },
   ]
 
-  const prayerRockItems = [
-    { path: '/prayer-rock-story', label: 'The Story (What is it?)' },
-    { path: '/prayer-rock', label: 'The Archive (Testimonies)' },
-    { path: '/submit-prayer', label: 'Submit a Prayer' },
+  const prayerItems = [
+    { path: '/prayer-rock-story', label: 'What is Prayer Rock?', icon: MessageCircle },
+    { path: '/prayer-rock', label: 'Prayer Archive', icon: MessageCircle },
+    { path: '/submit-prayer', label: 'Submit a Prayer', icon: MessageCircle },
   ]
+
+  const getLinkClass = (path: string) => `px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+    pathname === path
+      ? 'bg-sky-100 dark:bg-sky-900/50 text-sky-700 dark:text-sky-300'
+      : 'text-gray-700 dark:text-gray-300 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-sky-50 dark:hover:bg-sky-900/30'
+  }`
+
+  const getDropdownButtonClass = (items: { path: string }[]) => `px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 flex items-center space-x-1 ${
+    items.some(item => pathname === item.path)
+      ? 'bg-sky-100 dark:bg-sky-900/50 text-sky-700 dark:text-sky-300'
+      : 'text-gray-700 dark:text-gray-300 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-sky-50 dark:hover:bg-sky-900/30'
+  }`
+
+  const getDropdownLinkClass = (path: string) => `block px-4 py-2 text-sm transition-all duration-200 ${
+    pathname === path
+      ? 'bg-sky-100 dark:bg-sky-900/50 text-sky-700 dark:text-sky-300'
+      : 'text-gray-600 dark:text-gray-300 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-sky-50 dark:hover:bg-sky-900/30'
+  }`
 
   return (
-    <nav className="fixed top-0 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg z-50 transition-all duration-300 border-b border-white/20 dark:border-gray-700/50">
+    <nav className="fixed top-0 w-full bg-white/90 dark:bg-night-900/90 backdrop-blur-md shadow-lg z-50 transition-all duration-300 border-b border-sky-200/30 dark:border-sky-700/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="flex items-center space-x-2 group">
-            <Flame className="h-8 w-8 text-flame-500 group-hover:text-flame-600 transition-colors duration-200" />
-            <span className="font-serif font-semibold text-xl text-gray-800 dark:text-white group-hover:text-flame-600 dark:group-hover:text-flame-400 transition-colors duration-200">
-              Shame to Flame
+          {/* Logo */}
+          <Link href="/" className="flex items-center space-x-3 group">
+            <div className="relative w-10 h-10">
+              <Image
+                src="/running-to-god-logo.jpg"
+                alt="Running to God"
+                fill
+                className="object-contain rounded"
+                priority
+              />
+            </div>
+            <span className="font-serif font-bold text-xl text-gray-800 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors duration-200">
+              Running to God
             </span>
           </Link>
 
+          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
-            <Link
-              href="/"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
-                pathname === '/'
-                  ? 'bg-flame-100 dark:bg-flame-900/50 text-flame-700 dark:text-flame-300'
-                  : 'text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30'
-              }`}
-            >
+            <Link href="/" className={getLinkClass('/')}>
               Home
             </Link>
 
+            {/* The Journey Dropdown */}
             <div
               className="relative"
-              onMouseEnter={handleAboutMouseEnter}
-              onMouseLeave={handleAboutMouseLeave}
+              onMouseEnter={handleJourneyMouseEnter}
+              onMouseLeave={handleJourneyMouseLeave}
             >
-              <button
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 flex items-center space-x-1 ${
-                  aboutItems.some(item => pathname === item.path)
-                    ? 'bg-flame-100 dark:bg-flame-900/50 text-flame-700 dark:text-flame-300'
-                    : 'text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30'
-                }`}
-              >
-                <span>About</span>
-                <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${aboutDropdownOpen ? 'rotate-180' : ''}`} />
+              <button className={getDropdownButtonClass(journeyItems)}>
+                <span>The Journey</span>
+                <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${journeyDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
-              <div className={`absolute top-full left-0 pt-1 transition-all duration-200 ${aboutDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
-                <div className="w-56 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 py-1">
-                  {aboutItems.map((item) => (
-                    <Link
-                      key={item.path}
-                      href={item.path}
-                      className={`block px-4 py-2 text-sm transition-all duration-200 ${
-                        pathname === item.path
-                          ? 'bg-flame-100 dark:bg-flame-900/50 text-flame-700 dark:text-flame-300'
-                          : 'text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30'
-                      }`}
-                    >
-                      {item.label}
+              <div className={`absolute top-full left-0 pt-1 transition-all duration-200 ${journeyDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+                <div className="w-56 bg-white dark:bg-night-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 py-1">
+                  {journeyItems.map((item) => (
+                    <Link key={item.path} href={item.path} className={getDropdownLinkClass(item.path)}>
+                      <span className="flex items-center gap-2">
+                        <item.icon className="h-4 w-4" />
+                        {item.label}
+                      </span>
                     </Link>
                   ))}
                 </div>
               </div>
             </div>
 
+            {/* Resources Dropdown */}
             <div
               className="relative"
               onMouseEnter={handleResourcesMouseEnter}
               onMouseLeave={handleResourcesMouseLeave}
             >
-              <button
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 flex items-center space-x-1 ${
-                  resourceItems.some(item => pathname === item.path)
-                    ? 'bg-flame-100 dark:bg-flame-900/50 text-flame-700 dark:text-flame-300'
-                    : 'text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30'
-                }`}
-              >
+              <button className={getDropdownButtonClass(resourceItems)}>
                 <span>Resources</span>
                 <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${resourcesDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
               <div className={`absolute top-full left-0 pt-1 transition-all duration-200 ${resourcesDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
-                <div className="w-56 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 py-1">
+                <div className="w-56 bg-white dark:bg-night-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 py-1">
                   {resourceItems.map((item) => (
-                    <Link
-                      key={item.path}
-                      href={item.path}
-                      className={`block px-4 py-2 text-sm transition-all duration-200 ${
-                        pathname === item.path
-                          ? 'bg-flame-100 dark:bg-flame-900/50 text-flame-700 dark:text-flame-300'
-                          : 'text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30'
-                      }`}
-                    >
-                      {item.label}
+                    <Link key={item.path} href={item.path} className={getDropdownLinkClass(item.path)}>
+                      <span className="flex items-center gap-2">
+                        <item.icon className="h-4 w-4" />
+                        {item.label}
+                      </span>
                     </Link>
                   ))}
                 </div>
               </div>
             </div>
 
+            {/* Bible Study Dropdown */}
             <div
               className="relative"
-              onMouseEnter={handleStudyLibraryMouseEnter}
-              onMouseLeave={handleStudyLibraryMouseLeave}
+              onMouseEnter={handleStudyMouseEnter}
+              onMouseLeave={handleStudyMouseLeave}
             >
-              <button
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 flex items-center space-x-1 ${
-                  studyLibraryItems.some(item => pathname === item.path)
-                    ? 'bg-flame-100 dark:bg-flame-900/50 text-flame-700 dark:text-flame-300'
-                    : 'text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30'
-                }`}
-              >
-                <span>Study Library</span>
-                <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${studyLibraryDropdownOpen ? 'rotate-180' : ''}`} />
+              <button className={getDropdownButtonClass(studyItems)}>
+                <span>Bible Study</span>
+                <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${studyDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
-              <div className={`absolute top-full left-0 pt-1 transition-all duration-200 ${studyLibraryDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
-                <div className="w-56 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 py-1">
-                  {studyLibraryItems.map((item) => (
-                    <Link
-                      key={item.path}
-                      href={item.path}
-                      className={`block px-4 py-2 text-sm transition-all duration-200 ${
-                        pathname === item.path
-                          ? 'bg-flame-100 dark:bg-flame-900/50 text-flame-700 dark:text-flame-300'
-                          : 'text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30'
-                      }`}
-                    >
-                      {item.label}
+              <div className={`absolute top-full left-0 pt-1 transition-all duration-200 ${studyDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+                <div className="w-56 bg-white dark:bg-night-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 py-1">
+                  {studyItems.map((item) => (
+                    <Link key={item.path} href={item.path} className={getDropdownLinkClass(item.path)}>
+                      <span className="flex items-center gap-2">
+                        <item.icon className="h-4 w-4" />
+                        {item.label}
+                      </span>
                     </Link>
                   ))}
                 </div>
               </div>
             </div>
 
+            {/* Prayer Dropdown */}
             <div
               className="relative"
-              onMouseEnter={handlePrayerRockMouseEnter}
-              onMouseLeave={handlePrayerRockMouseLeave}
+              onMouseEnter={handlePrayerMouseEnter}
+              onMouseLeave={handlePrayerMouseLeave}
             >
-              <button
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 flex items-center space-x-1 ${
-                  prayerRockItems.some(item => pathname === item.path)
-                    ? 'bg-flame-100 dark:bg-flame-900/50 text-flame-700 dark:text-flame-300'
-                    : 'text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30'
-                }`}
-              >
-                <span>Prayer Rock</span>
-                <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${prayerRockDropdownOpen ? 'rotate-180' : ''}`} />
+              <button className={getDropdownButtonClass(prayerItems)}>
+                <span>Prayer</span>
+                <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${prayerDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
-              <div className={`absolute top-full left-0 pt-1 transition-all duration-200 ${prayerRockDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
-                <div className="w-56 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 py-1">
-                  {prayerRockItems.map((item) => (
-                    <Link
-                      key={item.path}
-                      href={item.path}
-                      className={`block px-4 py-2 text-sm transition-all duration-200 ${
-                        pathname === item.path
-                          ? 'bg-flame-100 dark:bg-flame-900/50 text-flame-700 dark:text-flame-300'
-                          : 'text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30'
-                      }`}
-                    >
-                      {item.label}
+              <div className={`absolute top-full left-0 pt-1 transition-all duration-200 ${prayerDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+                <div className="w-56 bg-white dark:bg-night-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 py-1">
+                  {prayerItems.map((item) => (
+                    <Link key={item.path} href={item.path} className={getDropdownLinkClass(item.path)}>
+                      <span className="flex items-center gap-2">
+                        <item.icon className="h-4 w-4" />
+                        {item.label}
+                      </span>
                     </Link>
                   ))}
                 </div>
               </div>
             </div>
 
-            {navItems.slice(1).map((item) => (
-              <Link
-                key={item.path}
-                href={item.path}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
-                  pathname === item.path
-                    ? 'bg-flame-100 dark:bg-flame-900/50 text-flame-700 dark:text-flame-300'
-                    : 'text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30'
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <Link
-              href="/settings"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 flex items-center gap-1 ${
-                pathname === '/settings'
-                  ? 'bg-flame-100 dark:bg-flame-900/50 text-flame-700 dark:text-flame-300'
-                  : 'text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30'
-              }`}
-            >
+            <Link href="/contact" className={getLinkClass('/contact')}>
+              Contact
+            </Link>
+
+            <Link href="/settings" className={`${getLinkClass('/settings')} flex items-center gap-1`}>
               <Settings className="h-4 w-4" />
               <span>Settings</span>
             </Link>
+            
             <ThemeToggle />
           </div>
 
+          {/* Mobile menu button */}
           <div className="lg:hidden flex items-center space-x-2">
             <ThemeToggle />
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30 transition-colors duration-200"
+              className="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-sky-50 dark:hover:bg-sky-900/30 transition-colors duration-200"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
 
+        {/* Mobile Navigation */}
         {isOpen && (
-          <div className="lg:hidden bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 animate-fade-in">
+          <div className="lg:hidden bg-white/95 dark:bg-night-900/95 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 animate-fade-in max-h-[80vh] overflow-y-auto">
             <div className="px-2 pt-2 pb-3 space-y-1">
               <Link
                 href="/"
                 onClick={() => setIsOpen(false)}
-                className={`block px-3 py-2 rounded-md text-base font-medium transition-all duration-200 ${
-                  pathname === '/'
-                    ? 'bg-flame-100 dark:bg-flame-900/50 text-flame-700 dark:text-flame-300'
-                    : 'text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30'
-                }`}
+                className={`block px-3 py-2 rounded-md text-base font-medium ${getLinkClass('/')}`}
               >
                 Home
               </Link>
 
+              {/* Mobile Journey Section */}
               <div>
                 <button
-                  onClick={() => setAboutDropdownOpen(!aboutDropdownOpen)}
-                  className="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30 transition-all duration-200"
+                  onClick={() => setJourneyDropdownOpen(!journeyDropdownOpen)}
+                  className="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300"
                 >
-                  <span>About</span>
-                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${aboutDropdownOpen ? 'rotate-180' : ''}`} />
+                  <span className="flex items-center gap-2"><Map className="h-5 w-5" /> The Journey</span>
+                  <ChevronDown className={`h-4 w-4 transition-transform ${journeyDropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
-                {aboutDropdownOpen && (
+                {journeyDropdownOpen && (
                   <div className="pl-4 space-y-1 mt-1">
-                    {aboutItems.map((item) => (
+                    {journeyItems.map((item) => (
                       <Link
                         key={item.path}
                         href={item.path}
                         onClick={() => setIsOpen(false)}
-                        className={`block px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
-                          pathname === item.path
-                            ? 'bg-flame-100 dark:bg-flame-900/50 text-flame-700 dark:text-flame-300'
-                            : 'text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30'
-                        }`}
+                        className={`block px-3 py-2 rounded-md text-sm ${getDropdownLinkClass(item.path)}`}
                       >
-                        {item.label}
+                        <span className="flex items-center gap-2">
+                          <item.icon className="h-4 w-4" />
+                          {item.label}
+                        </span>
                       </Link>
                     ))}
                   </div>
                 )}
               </div>
 
+              {/* Mobile Resources Section */}
               <div>
                 <button
                   onClick={() => setResourcesDropdownOpen(!resourcesDropdownOpen)}
-                  className="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30 transition-all duration-200"
+                  className="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300"
                 >
-                  <span>Resources</span>
-                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${resourcesDropdownOpen ? 'rotate-180' : ''}`} />
+                  <span className="flex items-center gap-2"><Flame className="h-5 w-5" /> Resources</span>
+                  <ChevronDown className={`h-4 w-4 transition-transform ${resourcesDropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
                 {resourcesDropdownOpen && (
                   <div className="pl-4 space-y-1 mt-1">
@@ -355,101 +297,89 @@ const Navigation = () => {
                         key={item.path}
                         href={item.path}
                         onClick={() => setIsOpen(false)}
-                        className={`block px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
-                          pathname === item.path
-                            ? 'bg-flame-100 dark:bg-flame-900/50 text-flame-700 dark:text-flame-300'
-                            : 'text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30'
-                        }`}
+                        className={`block px-3 py-2 rounded-md text-sm ${getDropdownLinkClass(item.path)}`}
                       >
-                        {item.label}
+                        <span className="flex items-center gap-2">
+                          <item.icon className="h-4 w-4" />
+                          {item.label}
+                        </span>
                       </Link>
                     ))}
                   </div>
                 )}
               </div>
 
+              {/* Mobile Bible Study Section */}
               <div>
                 <button
-                  onClick={() => setStudyLibraryDropdownOpen(!studyLibraryDropdownOpen)}
-                  className="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30 transition-all duration-200"
+                  onClick={() => setStudyDropdownOpen(!studyDropdownOpen)}
+                  className="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300"
                 >
-                  <span>Study Library</span>
-                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${studyLibraryDropdownOpen ? 'rotate-180' : ''}`} />
+                  <span className="flex items-center gap-2"><BookOpen className="h-5 w-5" /> Bible Study</span>
+                  <ChevronDown className={`h-4 w-4 transition-transform ${studyDropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
-                {studyLibraryDropdownOpen && (
+                {studyDropdownOpen && (
                   <div className="pl-4 space-y-1 mt-1">
-                    {studyLibraryItems.map((item) => (
+                    {studyItems.map((item) => (
                       <Link
                         key={item.path}
                         href={item.path}
                         onClick={() => setIsOpen(false)}
-                        className={`block px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
-                          pathname === item.path
-                            ? 'bg-flame-100 dark:bg-flame-900/50 text-flame-700 dark:text-flame-300'
-                            : 'text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30'
-                        }`}
+                        className={`block px-3 py-2 rounded-md text-sm ${getDropdownLinkClass(item.path)}`}
                       >
-                        {item.label}
+                        <span className="flex items-center gap-2">
+                          <item.icon className="h-4 w-4" />
+                          {item.label}
+                        </span>
                       </Link>
                     ))}
                   </div>
                 )}
               </div>
 
+              {/* Mobile Prayer Section */}
               <div>
                 <button
-                  onClick={() => setPrayerRockDropdownOpen(!prayerRockDropdownOpen)}
-                  className="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30 transition-all duration-200"
+                  onClick={() => setPrayerDropdownOpen(!prayerDropdownOpen)}
+                  className="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300"
                 >
-                  <span>Prayer Rock</span>
-                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${prayerRockDropdownOpen ? 'rotate-180' : ''}`} />
+                  <span className="flex items-center gap-2"><MessageCircle className="h-5 w-5" /> Prayer</span>
+                  <ChevronDown className={`h-4 w-4 transition-transform ${prayerDropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
-                {prayerRockDropdownOpen && (
+                {prayerDropdownOpen && (
                   <div className="pl-4 space-y-1 mt-1">
-                    {prayerRockItems.map((item) => (
+                    {prayerItems.map((item) => (
                       <Link
                         key={item.path}
                         href={item.path}
                         onClick={() => setIsOpen(false)}
-                        className={`block px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
-                          pathname === item.path
-                            ? 'bg-flame-100 dark:bg-flame-900/50 text-flame-700 dark:text-flame-300'
-                            : 'text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30'
-                        }`}
+                        className={`block px-3 py-2 rounded-md text-sm ${getDropdownLinkClass(item.path)}`}
                       >
-                        {item.label}
+                        <span className="flex items-center gap-2">
+                          <item.icon className="h-4 w-4" />
+                          {item.label}
+                        </span>
                       </Link>
                     ))}
                   </div>
                 )}
               </div>
 
-              {navItems.slice(1).map((item) => (
-                <Link
-                  key={item.path}
-                  href={item.path}
-                  onClick={() => setIsOpen(false)}
-                  className={`block px-3 py-2 rounded-md text-base font-medium transition-all duration-200 ${
-                    pathname === item.path
-                      ? 'bg-flame-100 dark:bg-flame-900/50 text-flame-700 dark:text-flame-300'
-                      : 'text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              <Link
+                href="/contact"
+                onClick={() => setIsOpen(false)}
+                className={`block px-3 py-2 rounded-md text-base font-medium ${getLinkClass('/contact')}`}
+              >
+                Contact
+              </Link>
 
               <Link
                 href="/settings"
                 onClick={() => setIsOpen(false)}
-                className={`flex items-center gap-2 px-3 py-2 rounded-md text-base font-medium transition-all duration-200 ${
-                  pathname === '/settings'
-                    ? 'bg-flame-100 dark:bg-flame-900/50 text-flame-700 dark:text-flame-300'
-                    : 'text-gray-600 dark:text-gray-300 hover:text-flame-600 dark:hover:text-flame-400 hover:bg-flame-50 dark:hover:bg-flame-900/30'
-                }`}
+                className={`flex items-center gap-2 px-3 py-2 rounded-md text-base font-medium ${getLinkClass('/settings')}`}
               >
                 <Settings className="h-5 w-5" />
-                <span>Settings</span>
+                Settings
               </Link>
             </div>
           </div>
