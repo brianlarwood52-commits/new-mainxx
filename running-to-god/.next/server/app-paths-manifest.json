@@ -1,11 +1,3 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/submit-prayer/page": "app/submit-prayer/page.js",
-  "/contact/page": "app/contact/page.js",
-  "/about/page": "app/about/page.js",
-  "/page": "app/page.js",
-  "/bible-study/page": "app/bible-study/page.js",
-  "/campfire-devotions/page": "app/campfire-devotions/page.js",
-  "/journey/[id]/page": "app/journey/[id]/page.js",
-  "/journey/page": "app/journey/page.js"
+  "/page": "app/page.js"
 }
