@@ -70,6 +70,12 @@
       "regex": "^/journey(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/journey(?:/)?$"
+    },
+    {
+      "page": "/submit-prayer",
+      "regex": "^/submit\\-prayer(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/submit\\-prayer(?:/)?$"
     }
   ],
   "dataRoutes": [],

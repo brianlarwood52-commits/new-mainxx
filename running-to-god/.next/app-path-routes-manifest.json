@@ -1,10 +1,11 @@
 {
   "/_not-found/page": "/_not-found",
+  "/submit-prayer/page": "/submit-prayer",
   "/contact/page": "/contact",
+  "/about/page": "/about",
   "/page": "/",
   "/bible-study/page": "/bible-study",
-  "/journey/page": "/journey",
-  "/about/page": "/about",
   "/campfire-devotions/page": "/campfire-devotions",
-  "/journey/[id]/page": "/journey/[id]"
+  "/journey/[id]/page": "/journey/[id]",
+  "/journey/page": "/journey"
 }

@@ -69,22 +69,22 @@ const Footer = () => {
                 </ul>
               </div>
 
-              {/* Connect */}
-              <div>
-                <h3 className="font-semibold text-sm uppercase tracking-wider mb-4 text-sky-300">
-                  Connect
-                </h3>
-                <ul className="space-y-3">
-                  <li><Link href="/contact" className="text-sky-200 hover:text-white transition-colors text-sm">Contact Us</Link></li>
-                  <li><Link href="/prayer" className="text-sky-200 hover:text-white transition-colors text-sm">Prayer Requests</Link></li>
-                  <li>
-                    <div className="flex items-center space-x-2 text-sky-200 text-sm mt-4">
-                      <Mail className="h-4 w-4 flex-shrink-0" />
-                      <span className="text-xs">hello@runningtogod.faith</span>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+                          {/* Connect */}
+                          <div>
+                            <h3 className="font-semibold text-sm uppercase tracking-wider mb-4 text-sky-300">
+                              Connect
+                            </h3>
+                            <ul className="space-y-3">
+                              <li><Link href="/submit-prayer" className="text-sky-200 hover:text-white transition-colors text-sm">Submit Prayer</Link></li>
+                              <li><Link href="/contact" className="text-sky-200 hover:text-white transition-colors text-sm">Contact Us</Link></li>
+                              <li>
+                                <div className="flex items-center space-x-2 text-sky-200 text-sm mt-4">
+                                  <Mail className="h-4 w-4 flex-shrink-0" />
+                                  <span className="text-xs">hello@runningtogod.faith</span>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
             </div>
           </div>
         </div>

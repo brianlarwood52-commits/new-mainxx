@@ -28,11 +28,12 @@ const Navigation = () => {
     { path: '/journey/port-lincoln', label: 'Port Lincoln', icon: Map },
   ]
 
-  const resourceItems = [
-    { path: '/campfire-devotions', label: 'Campfire Devotions', icon: Flame },
-    { path: '/bible-study', label: 'Bible Studies', icon: BookOpen },
-    { path: '/about', label: 'About This Ministry', icon: Users },
-  ]
+              const resourceItems = [
+                { path: '/campfire-devotions', label: 'Campfire Devotions', icon: Flame },
+                { path: '/bible-study', label: 'Bible Studies', icon: BookOpen },
+                { path: '/submit-prayer', label: 'Submit Prayer', icon: MessageCircle },
+                { path: '/about', label: 'About This Ministry', icon: Users },
+              ]
 
   return (
     <nav className="fixed top-0 w-full bg-white/95 dark:bg-night-900/95 backdrop-blur-md shadow-lg z-50 border-b border-sky-100 dark:border-sky-900/50">
