@@ -13,13 +13,13 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-earth-700 via-earth-800 to-stone-950" />
         
         <div className="relative z-10 max-w-5xl mx-auto px-6 pb-20 w-full">
-          <p className="location-tag mb-4">THE STORY BEHIND THE JOURNEY</p>
+          <p className="location-tag mb-4">A JOURNEY TO JESUS</p>
           <h1 className="font-cinematic text-6xl md:text-8xl text-dust-100 tracking-wider title-card mb-4">
             WHY THE ROAD
           </h1>
           <p className="text-xl text-dust-300 font-serif max-w-2xl">
             Before there was a journey, there was a question. 
-            Before there was a destination, there was a need to escape.
+            Before there was a destination, there was a Saviour waiting to be found.
           </p>
         </div>
       </section>
@@ -79,13 +79,25 @@ export default function AboutPage() {
               </p>
 
               <p>
-                This ministry exists because of that road. Every kilometre taught me something. 
-                Every story needs to be told. And maybe—just maybe—you&apos;re on your own 
-                road right now, looking for the same thing I was.
+                And at the centre of it all—I found <strong className="text-cyan-400">Jesus</strong>. 
+                Not the Jesus I thought I knew. Not rules and religion. But the real Jesus—
+                the One who walked dusty roads just like this one, who sat with broken people, 
+                who offers grace when we least deserve it.
               </p>
 
-              <p className="font-journal text-3xl text-earth-400 text-center my-12">
-                You&apos;re not alone on this journey.
+              <p>
+                This ministry exists because of that road and that encounter. Every kilometre 
+                taught me something about His character—His compassion, His patience, His 
+                relentless love. Every story points back to Him.
+              </p>
+
+              <p>
+                And maybe—just maybe—you&apos;re on your own road right now, 
+                looking for the same thing I was. Looking for Jesus.
+              </p>
+
+              <p className="font-journal text-3xl text-cyan-400 text-center my-12">
+                He&apos;s already walking beside you.
               </p>
             </div>
           </div>

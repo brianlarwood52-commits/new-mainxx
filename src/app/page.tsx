@@ -110,9 +110,19 @@ export default function HomePage() {
           <blockquote className="quote-overlay text-dust-200 mb-8">
             &ldquo;Sometimes you have to drive 2,500 kilometres through nothing to find everything.&rdquo;
           </blockquote>
-          <p className="font-mono text-sm text-earth-500 tracking-widest">
+          <p className="font-mono text-sm text-earth-500 tracking-widest mb-12">
             — A JOURNEY ACROSS THE AUSTRALIAN OUTBACK —
           </p>
+          
+          {/* Jesus focus statement */}
+          <div className="border-t border-stone-800 pt-12 mt-12">
+            <p className="font-mono text-xs text-cyan-500 tracking-widest mb-6">THE HEART OF THIS JOURNEY</p>
+            <p className="text-2xl md:text-3xl text-dust-300 font-serif italic max-w-2xl mx-auto">
+              At the centre of every road, every story, every star-filled night—
+              there is <span className="text-cyan-400 not-italic font-cinematic tracking-wider">Jesus Christ</span>, 
+              the Son of God.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -326,6 +336,63 @@ export default function HomePage() {
 
           {/* Campfire glow at bottom */}
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-16 bg-campfire-500/30 blur-3xl" />
+        </div>
+      </section>
+
+      {/* ===== JESUS CHARACTER SECTION ===== */}
+      <section className="relative py-32 bg-gradient-to-b from-night-950 via-stone-950 to-stone-900">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <p className="font-mono text-xs text-cyan-500 tracking-widest mb-4">THE SON OF GOD</p>
+            <h2 className="font-cinematic text-5xl md:text-7xl text-dust-100 tracking-wider title-card">
+              KNOWING JESUS
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            {/* Compassion */}
+            <div className="text-center p-8 border border-stone-800 rounded-lg bg-stone-950/50">
+              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-cyan-500/10 flex items-center justify-center">
+                <span className="font-cinematic text-3xl text-cyan-400">♥</span>
+              </div>
+              <h3 className="font-cinematic text-2xl text-dust-100 tracking-wider mb-4">COMPASSION</h3>
+              <p className="text-dust-400 font-serif text-sm leading-relaxed">
+                &ldquo;When he saw the crowds, he had compassion on them, because they were harassed and helpless.&rdquo;
+              </p>
+              <p className="font-mono text-xs text-dust-600 mt-4">MATTHEW 9:36</p>
+            </div>
+
+            {/* Grace */}
+            <div className="text-center p-8 border border-stone-800 rounded-lg bg-stone-950/50">
+              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-cyan-500/10 flex items-center justify-center">
+                <span className="font-cinematic text-3xl text-cyan-400">✝</span>
+              </div>
+              <h3 className="font-cinematic text-2xl text-dust-100 tracking-wider mb-4">GRACE</h3>
+              <p className="text-dust-400 font-serif text-sm leading-relaxed">
+                &ldquo;For by grace you have been saved through faith. And this is not your own doing; it is the gift of God.&rdquo;
+              </p>
+              <p className="font-mono text-xs text-dust-600 mt-4">EPHESIANS 2:8</p>
+            </div>
+
+            {/* Truth */}
+            <div className="text-center p-8 border border-stone-800 rounded-lg bg-stone-950/50">
+              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-cyan-500/10 flex items-center justify-center">
+                <span className="font-cinematic text-3xl text-cyan-400">☀</span>
+              </div>
+              <h3 className="font-cinematic text-2xl text-dust-100 tracking-wider mb-4">TRUTH</h3>
+              <p className="text-dust-400 font-serif text-sm leading-relaxed">
+                &ldquo;Then you will know the truth, and the truth will set you free.&rdquo;
+              </p>
+              <p className="font-mono text-xs text-dust-600 mt-4">JOHN 8:32</p>
+            </div>
+          </div>
+
+          <div className="text-center">
+            <p className="text-xl md:text-2xl text-dust-300 font-serif italic max-w-3xl mx-auto">
+              This journey is about discovering who Jesus really is—not religion, not rules, 
+              but a relationship with the One who walked dusty roads Himself.
+            </p>
+          </div>
         </div>
       </section>
 

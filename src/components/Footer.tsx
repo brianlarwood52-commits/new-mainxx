@@ -55,13 +55,13 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Scripture */}
+          {/* Scripture - Jesus focused */}
           <div>
-            <p className="font-mono text-xs text-cyan-500 tracking-widest mb-6">ROAD VERSE</p>
+            <p className="font-mono text-xs text-cyan-500 tracking-widest mb-6">THE WAY</p>
             <blockquote className="text-dust-400 text-sm italic font-serif border-l-2 border-cyan-700 pl-4">
-              &ldquo;Your word is a lamp for my feet, a light on my path.&rdquo;
+              &ldquo;I am the way, the truth, and the life. No one comes to the Father except through me.&rdquo;
               <footer className="mt-3 not-italic font-mono text-xs text-dust-600 tracking-wider">
-                — PSALM 119:105
+                — JESUS CHRIST, JOHN 14:6
               </footer>
             </blockquote>
           </div>
@@ -71,13 +71,26 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-stone-900">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="font-mono text-xs text-dust-700 tracking-wider">
-              © {currentYear} RUNNING TO GOD MINISTRY
-            </p>
-            <div className="flex items-center gap-1 font-mono text-xs text-dust-700 tracking-wider">
-              MADE WITH <Heart className="h-3 w-3 text-cyan-500 mx-1 fill-current" /> 
-              ON THE ROAD
+          <div className="flex flex-col gap-4">
+            {/* Main copyright */}
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+              <p className="font-mono text-xs text-dust-700 tracking-wider">
+                © {currentYear} RUNNING TO GOD MINISTRY
+              </p>
+              <div className="flex items-center gap-1 font-mono text-xs text-dust-700 tracking-wider">
+                MADE WITH <Heart className="h-3 w-3 text-cyan-500 mx-1 fill-current" /> 
+                ON THE ROAD
+              </div>
+            </div>
+            
+            {/* Media copyright */}
+            <div className="text-center border-t border-stone-900 pt-4">
+              <p className="font-mono text-[10px] text-dust-700 tracking-wider">
+                ALL PHOTOGRAPHS AND VIDEOS © BRIAN LARWOOD. ALL RIGHTS RESERVED.
+              </p>
+              <p className="font-mono text-[10px] text-dust-800 tracking-wider mt-1">
+                NO REPRODUCTION WITHOUT WRITTEN PERMISSION
+              </p>
             </div>
           </div>
         </div>

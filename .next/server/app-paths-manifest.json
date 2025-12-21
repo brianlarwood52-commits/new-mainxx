@@ -1,8 +1,8 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/campfire/page": "app/campfire/page.js",
   "/about/page": "app/about/page.js",
   "/contact/page": "app/contact/page.js",
+  "/campfire/page": "app/campfire/page.js",
   "/devotions/page": "app/devotions/page.js",
   "/journey/page": "app/journey/page.js",
   "/page": "app/page.js"
