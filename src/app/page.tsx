@@ -7,7 +7,7 @@ import { Play, ChevronDown, MapPin, BookOpen, Flame, ArrowRight } from 'lucide-r
 
 export default function HomePage() {
   return (
-    <div className="bg-stone-950 text-stone-200 overflow-hidden">
+    <div className="text-stone-200 overflow-hidden">
       
       {/* ===== OPENING SHOT - Full Screen Hero ===== */}
       <section className="relative h-screen flex items-center justify-center cinematic-bars vignette film-grain">
@@ -105,7 +105,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== THE PREMISE - Documentary intro ===== */}
-      <section className="relative py-32 bg-stone-950">
+      <section className="relative py-32 bg-stone-950/80 backdrop-blur-sm">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <blockquote className="quote-overlay text-dust-200 mb-8">
             &ldquo;Sometimes you have to drive 2,500 kilometres through nothing to find everything.&rdquo;
@@ -127,7 +127,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== CHAPTER CARDS - Like documentary sections ===== */}
-      <section className="relative py-20 bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950">
+      <section className="relative py-20 bg-gradient-to-b from-stone-950/70 via-stone-900/60 to-stone-950/70 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto px-4">
           
           {/* Section title */}
@@ -242,8 +242,8 @@ export default function HomePage() {
 
       {/* ===== FEATURED SCENE - The Nullarbor ===== */}
       <section className="relative h-screen flex items-center vignette film-grain">
-        {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-dust-400 via-earth-600 to-stone-900" />
+        {/* Background - semi-transparent to show stars */}
+        <div className="absolute inset-0 bg-gradient-to-b from-dust-400/90 via-earth-600/85 to-stone-900/80" />
         
         {/* Flat horizon */}
         <div className="absolute top-[40%] left-0 right-0 h-px bg-earth-800" />
@@ -302,7 +302,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== SCRIPTURE SCENE ===== */}
-      <section className="relative py-32 bg-night-950 overflow-hidden">
+      <section className="relative py-32 bg-night-950/60 overflow-hidden backdrop-blur-sm">
         {/* Stars */}
         <div className="absolute inset-0">
           {[...Array(100)].map((_, i) => (
@@ -340,7 +340,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== JESUS CHARACTER SECTION ===== */}
-      <section className="relative py-32 bg-gradient-to-b from-night-950 via-stone-950 to-stone-900">
+      <section className="relative py-32 bg-gradient-to-b from-night-950/50 via-stone-950/60 to-stone-900/70 backdrop-blur-sm">
         <div className="max-w-5xl mx-auto px-4">
           <div className="text-center mb-16">
             <p className="font-mono text-xs text-cyan-500 tracking-widest mb-4">THE SON OF GOD</p>
@@ -397,7 +397,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== FINAL CTA - Documentary end card ===== */}
-      <section className="relative py-32 bg-stone-950 text-center">
+      <section className="relative py-32 bg-stone-950/80 backdrop-blur-sm text-center">
         <div className="max-w-3xl mx-auto px-4">
           <p className="font-mono text-xs text-earth-500 tracking-widest mb-6">
             YOUR JOURNEY AWAITS
