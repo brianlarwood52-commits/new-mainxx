@@ -79,9 +79,14 @@ export default function CampfirePage() {
               
               <div className="space-y-4 text-dust-300 font-serif leading-relaxed">
                 <p>
-                  There I was, somewhere on the endless road, when I spotted something that made me 
-                  pull over immediately. A man in a full leopard-print bodysuit, pushing a wheelbarrow, 
-                  walking towards Sydney.
+                  It was a <strong className="text-campfire-400">scorching hot day</strong>—the kind where 
+                  the heat shimmers off the road and you question every life decision that led you here. 
+                  I was about <strong className="text-dust-100">two hours out of Norseman</strong>, heading 
+                  west, when I spotted something that made me pull over immediately.
+                </p>
+                <p>
+                  A man. In a full leopard-print bodysuit. Pushing a wheelbarrow. Walking towards Sydney. 
+                  In <em>this</em> heat.
                 </p>
                 <p>
                   Meet <strong className="text-dust-100">Kentaro Jin</strong>—a Japanese construction worker 
@@ -91,7 +96,17 @@ export default function CampfirePage() {
                 </p>
                 <p>
                   He sleeps in a tent by the roadside. Walks 10 hours a day. Visits schools to inspire 
-                  kids to follow their dreams. Gives high-fives to passing cars. All while dressed as a leopard.
+                  kids to follow their dreams. Gives high-fives to passing cars. All while dressed as a leopard 
+                  in 40-degree heat.
+                </p>
+              </div>
+
+              <div className="bg-campfire-900/20 border border-campfire-800/30 rounded-lg p-4 my-6">
+                <p className="font-mono text-xs text-campfire-400 tracking-widest mb-2">📍 THE ENCOUNTER</p>
+                <p className="text-dust-300 font-serif text-sm">
+                  <strong>Location:</strong> Approximately 2 hours east of Norseman, WA<br />
+                  <strong>Conditions:</strong> Extreme heat<br />
+                  <strong>Direction:</strong> He was heading east towards Esperance & Sydney
                 </p>
               </div>
 
