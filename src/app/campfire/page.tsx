@@ -188,8 +188,104 @@ export default function CampfirePage() {
         </div>
       </section>
 
-      {/* ===== MORE STORIES COMING ===== */}
+      {/* ===== THE DOCTOR ===== */}
       <section className="py-20 bg-stone-950/60 backdrop-blur-sm">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="flex items-center gap-3 mb-8">
+            <span className="text-2xl">🐱</span>
+            <p className="font-mono text-xs text-cyan-500 tracking-widest">CREATURES OF THE ROAD</p>
+          </div>
+          
+          {/* The Doctor Feature */}
+          <div className="grid md:grid-cols-2 gap-8 items-start">
+            {/* Images */}
+            <div className="space-y-4">
+              <div className="relative aspect-[16/9] rounded-lg overflow-hidden worn-photo">
+                <Image
+                  src="/images/Munglinup-roadhouse.jpg"
+                  alt="Munglinup Roadhouse - General Store, Liquor, Coffee, Bait, Ice"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                  <p className="font-mono text-xs text-dust-400">© Brian Larwood</p>
+                </div>
+              </div>
+              <div className="relative aspect-[16/9] rounded-lg overflow-hidden worn-photo">
+                <Image
+                  src="/images/the-doctor.jpg"
+                  alt="The Doctor - the roadhouse cat at Munglinup"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                  <p className="font-mono text-xs text-dust-400">© Brian Larwood</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Story */}
+            <div>
+              <p className="font-mono text-xs text-earth-500 tracking-widest mb-2">MUNGLINUP ROADHOUSE</p>
+              <h2 className="font-cinematic text-4xl md:text-5xl text-dust-100 tracking-wider mb-4">
+                THE DOCTOR
+              </h2>
+              <p className="font-mono text-sm text-cyan-500 mb-6">&ldquo;NOT EXACTLY THE RITZ&rdquo;</p>
+              
+              <div className="space-y-4 text-dust-300 font-serif leading-relaxed">
+                <p>
+                  I&apos;d pulled into the <strong className="text-dust-100">Munglinup Roadhouse</strong>—the 
+                  kind of place that&apos;s equal parts general store, servo, and outback institution. 
+                  General Store. Liquor. Coffee. Bait. Ice. Everything a traveller needs, nothing they don&apos;t.
+                </p>
+                <p>
+                  I was inside buying some food and drinks when this cat came strolling in like he owned 
+                  the place. Friendly little thing, weaving between the shelves, totally at home.
+                </p>
+                <p>
+                  &ldquo;What a friendly cat!&rdquo; I said to the young lady behind the counter.
+                </p>
+                <p>
+                  She looked up, glanced at the cat, and said in the most matter-of-fact voice imaginable:
+                </p>
+                <p className="text-2xl text-cyan-400 font-journal my-6 text-center">
+                  &ldquo;Oh, that&apos;s only The Doctor.&rdquo;
+                </p>
+                <p>
+                  <strong className="text-dust-100">The Doctor.</strong> Of course. Clearly one of his 
+                  regenerations was as a tabby cat, roaming the Australian outback, keeping watch over 
+                  weary travellers at a roadhouse in the middle of nowhere.
+                </p>
+                <p className="text-dust-400 italic">
+                  Look into those eyes and tell me he hasn&apos;t seen the Time Vortex. I dare you.
+                </p>
+              </div>
+
+              <div className="bg-cyan-900/20 border border-cyan-800/30 rounded-lg p-4 my-6">
+                <p className="font-mono text-xs text-cyan-400 tracking-widest mb-2">📍 THE ENCOUNTER</p>
+                <p className="text-dust-300 font-serif text-sm">
+                  <strong>Location:</strong> Munglinup Roadhouse, WA<br />
+                  <strong>Amenities:</strong> General Store, Liquor, Coffee, Bait, Ice<br />
+                  <strong>Resident Time Lord:</strong> The Doctor (feline regeneration)<br />
+                  <strong>Vibe:</strong> &ldquo;Not exactly the Ritz&rdquo;
+                </p>
+              </div>
+
+              <blockquote className="my-6 pl-4 border-l-2 border-cyan-600">
+                <p className="font-serif italic text-dust-400 text-sm">
+                  In 900 years of time and space, I&apos;ve never met anyone who wasn&apos;t important.
+                </p>
+                <cite className="font-mono text-xs text-cyan-600 mt-2 block">
+                  — THE DOCTOR (PROBABLY THIS ONE TOO)
+                </cite>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== MORE STORIES COMING ===== */}
+      <section className="py-20 bg-stone-950/50 backdrop-blur-sm">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-12">
             <Flame className="h-12 w-12 text-campfire-500 mx-auto mb-6" />
