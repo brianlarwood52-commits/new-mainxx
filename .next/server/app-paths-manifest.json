@@ -1,11 +1,11 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/campfire/page": "app/campfire/page.js",
   "/about/page": "app/about/page.js",
+  "/campfire/page": "app/campfire/page.js",
   "/contact/page": "app/contact/page.js",
+  "/devotions/page": "app/devotions/page.js",
   "/journey/page": "app/journey/page.js",
   "/page": "app/page.js",
-  "/devotions/page": "app/devotions/page.js",
   "/privacy-policy/page": "app/privacy-policy/page.js",
   "/sitemap/page": "app/sitemap/page.js",
   "/terms/page": "app/terms/page.js",

@@ -2,9 +2,8 @@
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { useTheme } from '@/context/ThemeContext'
 import Logo from './Logo'
-import { Sun, Moon, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 
 const navLinks = [
   { href: '/', label: 'HOME' },
@@ -16,7 +15,6 @@ const navLinks = [
 ]
 
 export default function Navigation() {
-  const { theme, toggleTheme } = useTheme()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -61,30 +59,14 @@ export default function Navigation() {
             ))}
           </div>
 
-          {/* Right side */}
-          <div className="flex items-center gap-4">
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="p-2 text-dust-500 hover:text-dust-200 transition-colors"
-              aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-            >
-              {theme === 'light' ? (
-                <Moon className="h-5 w-5" />
-              ) : (
-                <Sun className="h-5 w-5" />
-              )}
-            </button>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden p-2 text-dust-400 hover:text-dust-100 transition-colors"
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="lg:hidden p-2 text-dust-400 hover:text-dust-100 transition-colors"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
       </div>
 

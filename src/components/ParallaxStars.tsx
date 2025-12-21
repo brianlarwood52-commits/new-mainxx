@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useState, useMemo } from 'react'
-import { useTheme } from '@/context/ThemeContext'
 
 interface Star {
   id: number
@@ -17,7 +16,6 @@ interface Star {
 export default function ParallaxStars() {
   const [scrollY, setScrollY] = useState(0)
   const [mounted, setMounted] = useState(false)
-  const { theme } = useTheme()
 
   // Generate stars only once using useMemo
   const stars = useMemo(() => {
@@ -96,16 +94,10 @@ export default function ParallaxStars() {
     return null
   }
 
-  // In light mode, show a subtle daytime sky instead of stars
-  const isLightMode = theme === 'light'
-
   return (
     <div 
-      className="fixed inset-0 pointer-events-none overflow-hidden transition-opacity duration-700"
-      style={{ 
-        zIndex: 0,
-        opacity: isLightMode ? 0 : 1, 
-      }}
+      className="fixed inset-0 pointer-events-none overflow-hidden"
+      style={{ zIndex: 0 }}
       aria-hidden="true"
     >
       {/* Deep space gradient background */}
