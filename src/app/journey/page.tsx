@@ -2,297 +2,12 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { MapPin, Fuel, Camera, Tent, Waves, ArrowRight, Anchor, RotateCcw, Coffee, Mountain, Shell, TreePine } from 'lucide-react'
-
-const journeyStops = [
-  // ===== OUTBOUND =====
-  {
-    km: 0,
-    location: 'Swan View',
-    region: 'Perth, Western Australia',
-    description: 'Packed the car at dawn. The road stretched out ahead—thousands of kilometres of unknown waiting. Left behind the familiar. Drove towards... something.',
-    type: 'start',
-    coordinates: '31.9°S 116.0°E',
-    leg: 'outbound',
-  },
-  {
-    km: 85,
-    location: 'Toodyay',
-    region: 'Avon Valley',
-    description: 'Historic town nestled in the Avon Valley. The first taste of country WA. Rolling hills and heritage buildings.',
-    type: 'town',
-    coordinates: '31.6°S 116.5°E',
-    leg: 'outbound',
-  },
-  {
-    km: 155,
-    location: 'Dowerin',
-    region: 'Wheatbelt',
-    description: 'Deep into wheat country now. Golden paddocks stretching to the horizon. The landscape starting to open up.',
-    type: 'town',
-    coordinates: '31.2°S 117.0°E',
-    leg: 'outbound',
-  },
-  {
-    km: 215,
-    location: 'Koorda',
-    region: 'Wheatbelt',
-    description: 'Small farming community. The kind of place where everyone waves as you drive past.',
-    type: 'town',
-    coordinates: '30.8°S 117.5°E',
-    leg: 'outbound',
-  },
-  {
-    km: 270,
-    location: 'Bencubbin',
-    region: 'Wheatbelt',
-    description: 'Grain silos towering over the main street. This is the heart of WA\'s wheat belt.',
-    type: 'town',
-    coordinates: '30.8°S 117.9°E',
-    leg: 'outbound',
-  },
-  {
-    km: 340,
-    location: 'Mukinbudin',
-    region: 'Wheatbelt',
-    description: 'The edge of the wheatbelt. Beyond here, the landscape starts to change. Getting further from everything familiar.',
-    type: 'town',
-    coordinates: '30.9°S 118.2°E',
-    leg: 'outbound',
-  },
-  {
-    km: 420,
-    location: 'Boondi Rock',
-    region: 'Outback WA',
-    description: 'Ancient granite outcrop rising from the red earth. A sacred place. Stopped here to stretch the legs and feel the silence.',
-    type: 'landmark',
-    coordinates: '31.2°S 119.1°E',
-    leg: 'outbound',
-  },
-  {
-    km: 560,
-    location: 'Coolgardie',
-    region: 'Goldfields',
-    description: 'Ghost of the gold rush. Once home to 15,000 people chasing dreams. Now a quiet reminder that nothing lasts forever.',
-    type: 'town',
-    coordinates: '31.2°S 121.2°E',
-    leg: 'outbound',
-  },
-  {
-    km: 720,
-    location: 'Norseman',
-    region: 'Gateway to the Nullarbor',
-    description: 'Last real town before the crossing. Filled the tank, checked the tyres, bought enough water for a small army. The servo owner asked where I was headed. "East," I said. He just nodded.',
-    type: 'town',
-    coordinates: '32.2°S 121.8°E',
-    leg: 'outbound',
-    quote: '"The Lord himself goes before you and will be with you."',
-    quoteRef: 'Deuteronomy 31:8',
-  },
-  {
-    km: 930,
-    location: 'Caiguna Roadhouse',
-    region: 'Start of the 90 Mile Straight',
-    description: '146.6 kilometres without a single turn coming up. The longest straight road in Australia. Fuel, coffee, deep breath.',
-    type: 'roadhouse',
-    coordinates: '32.3°S 125.5°E',
-    leg: 'outbound',
-  },
-  {
-    km: 1090,
-    location: 'Madura Roadhouse',
-    region: 'Nullarbor',
-    description: 'Perched on the edge of the Madura Pass. The views here are something else. The endless plain stretching out below.',
-    type: 'roadhouse',
-    coordinates: '31.9°S 127.0°E',
-    leg: 'outbound',
-  },
-  {
-    km: 1180,
-    location: 'Eucla',
-    region: 'Nullarbor',
-    description: 'Old telegraph station slowly being swallowed by sand dunes. Time moves differently out here.',
-    type: 'landmark',
-    coordinates: '31.7°S 128.9°E',
-    leg: 'outbound',
-  },
-  {
-    km: 1200,
-    location: 'Border Village',
-    region: 'WA/SA Border',
-    description: 'Crossed into South Australia. Changed the clock forward. Somehow felt like more than just a timezone change.',
-    type: 'border',
-    coordinates: '31.0°S 129.0°E',
-    leg: 'outbound',
-  },
-  {
-    km: 1400,
-    location: 'Nullarbor Roadhouse',
-    region: 'The Heart of Nowhere',
-    description: 'Met a grey nomad couple who\'d been on the road for three years. "You\'re not running from something," the old man said. "You\'re running to something. I can see it in your eyes."',
-    type: 'roadhouse',
-    coordinates: '31.4°S 130.9°E',
-    leg: 'outbound',
-    quote: '"Be still and know that I am God."',
-    quoteRef: 'Psalm 46:10',
-  },
-  {
-    km: 1500,
-    location: 'Mexican Hat',
-    region: 'Bunda Cliffs Lookout',
-    description: 'Named for the rock formation that looks like a sombrero. But the real attraction is the view—100-metre cliffs plunging into the Southern Ocean. Watched whales breach in the distance. Wept.',
-    type: 'landmark',
-    coordinates: '31.0°S 129.5°E',
-    leg: 'outbound',
-    quote: '"The heavens declare the glory of God."',
-    quoteRef: 'Psalm 19:1',
-  },
-  {
-    km: 2100,
-    location: 'Ceduna',
-    region: 'South Australia',
-    description: 'End of the Nullarbor. Civilisation returns. A real shower, a real bed. But somehow I missed the silence already.',
-    type: 'town',
-    coordinates: '32.1°S 133.7°E',
-    leg: 'outbound',
-  },
-  {
-    km: 3430,
-    location: 'Port Lincoln',
-    region: 'Eyre Peninsula, SA',
-    description: 'The turnaround point. Parked the car, walked to the water, sat down. Didn\'t move for an hour. Somewhere on that road, I\'d found what I was looking for. Or maybe it found me.',
-    type: 'destination',
-    coordinates: '34.7°S 135.9°E',
-    leg: 'turnaround',
-    quote: '"He who began a good work in you will carry it on to completion."',
-    quoteRef: 'Philippians 1:6',
-  },
-
-  // ===== RETURN LEG =====
-  {
-    km: 3450,
-    location: 'Coffin Bay',
-    region: 'Eyre Peninsula',
-    description: 'Famous for its oysters. Peaceful waters and rugged coastline. A quiet start to the journey home.',
-    type: 'landmark',
-    coordinates: '34.6°S 135.5°E',
-    leg: 'return',
-  },
-  {
-    km: 3500,
-    location: 'Colton Bakehouse',
-    region: 'The Biggest Temptation',
-    description: 'The pies. The pastries. The smell of fresh bread. Nearly didn\'t leave. Some temptations are worth giving in to.',
-    type: 'highlight',
-    coordinates: '34.3°S 135.4°E',
-    leg: 'return',
-  },
-  {
-    km: 3580,
-    location: 'Talia Caves',
-    region: 'Eyre Peninsula',
-    description: 'Sea caves carved by millennia of waves. The power of water against rock. The slow work of time.',
-    type: 'landmark',
-    coordinates: '33.9°S 134.8°E',
-    leg: 'return',
-  },
-  {
-    km: 3650,
-    location: 'Venus Bay',
-    region: 'Eyre Peninsula',
-    description: 'Pristine beaches, crystal clear water. Named by Matthew Flinders. Felt like discovering something ancient.',
-    type: 'landmark',
-    coordinates: '33.2°S 134.7°E',
-    leg: 'return',
-  },
-  {
-    km: 3850,
-    location: 'Penong',
-    region: 'Eyre Highway',
-    description: 'Windmill museum town. The gateway to some of Australia\'s best surf beaches.',
-    type: 'town',
-    coordinates: '31.3°S 132.9°E',
-    leg: 'return',
-  },
-  {
-    km: 3880,
-    location: 'Cactus Beach',
-    region: 'Point Sinclair',
-    description: 'World-famous surf break. Even if you don\'t surf, the raw power of those waves is humbling.',
-    type: 'landmark',
-    coordinates: '31.5°S 132.5°E',
-    leg: 'return',
-  },
-  {
-    km: 3900,
-    location: 'Point Sinclair',
-    region: 'Great Australian Bight',
-    description: 'Remote headland jutting into the Southern Ocean. The kind of place that makes you feel very small and very alive.',
-    type: 'landmark',
-    coordinates: '31.5°S 132.4°E',
-    leg: 'return',
-  },
-  {
-    km: 3920,
-    location: 'Port Le Hunte Jetty',
-    region: 'Historic Jetty',
-    description: 'Old timber jetty reaching out into the bay. Sunset here was something else. Sat on the edge with feet dangling, watching the light fade.',
-    type: 'landmark',
-    coordinates: '31.5°S 132.4°E',
-    leg: 'return',
-  },
-  {
-    km: 5500,
-    location: 'Norseman',
-    region: 'Back in WA',
-    description: 'Back at the gateway. But this time, instead of heading straight home, turned south. There was more to see.',
-    type: 'town',
-    coordinates: '32.2°S 121.8°E',
-    leg: 'return',
-  },
-  {
-    km: 5700,
-    location: 'Esperance',
-    region: 'South Coast, WA',
-    description: 'White sand beaches that look like they belong in the Caribbean. Lucky Bay, where kangaroos laze on the sand. A reminder that beauty often hides in unexpected places.',
-    type: 'landmark',
-    coordinates: '33.9°S 121.9°E',
-    leg: 'return',
-    quote: '"The earth is the Lord\'s, and everything in it."',
-    quoteRef: 'Psalm 24:1',
-  },
-  {
-    km: 5750,
-    location: 'Pink Lake',
-    region: 'Esperance',
-    description: 'A lake that glows pink. Something about algae and salt, but the science doesn\'t capture the magic of it.',
-    type: 'landmark',
-    coordinates: '33.8°S 121.8°E',
-    leg: 'return',
-  },
-  {
-    km: 5970,
-    location: 'Israelite Bay',
-    region: 'The Edge of Nowhere',
-    description: 'The road turned to dirt. Then to sand. Then to almost nothing. An abandoned telegraph station. Complete isolation. Out here, at the edge of everything, the journey finally made sense.',
-    type: 'landmark',
-    coordinates: '33.6°S 123.9°E',
-    leg: 'return',
-  },
-  {
-    km: 6859,
-    location: 'Swan View',
-    region: 'Perth, Western Australia',
-    description: 'Back where I started. But not the same person who left. 6,859.5 kilometres later, the road had done its work. The journey was over. The transformation was just beginning.',
-    type: 'end',
-    coordinates: '31.9°S 116.0°E',
-    leg: 'return',
-  },
-]
+import { MapPin, Fuel, Camera, Tent, Waves, ArrowRight, Anchor, RotateCcw, Coffee, Mountain, Shell, TreePine, ChevronRight } from 'lucide-react'
+import { journeyStops } from '@/data/journeyStops'
 
 export default function JourneyPage() {
   return (
-    <div className="min-h-screen bg-stone-950">
+    <div className="min-h-screen">
       
       {/* ===== HERO ===== */}
       <section className="relative h-[70vh] flex items-end vignette film-grain">
@@ -313,7 +28,7 @@ export default function JourneyPage() {
       </section>
 
       {/* ===== ROUTE OVERVIEW ===== */}
-      <section className="py-12 bg-stone-900/50">
+      <section className="py-12 bg-stone-900/40 backdrop-blur-sm">
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-8">
             {/* Outbound */}
@@ -342,7 +57,7 @@ export default function JourneyPage() {
       </section>
 
       {/* ===== JOURNEY TIMELINE ===== */}
-      <section className="py-20">
+      <section className="py-20 bg-stone-950/60 backdrop-blur-sm">
         <div className="max-w-4xl mx-auto px-6">
           <div className="space-y-8">
             {journeyStops.map((stop, index) => (
@@ -417,9 +132,15 @@ export default function JourneyPage() {
                                     stop.type === 'highlight' ? 'border-pink-900/50' : 'border-stone-800'}`}>
                       <div className="flex items-start justify-between gap-4 mb-2">
                         <div>
-                          <h2 className="font-cinematic text-xl md:text-2xl text-dust-100 tracking-wider">
-                            {stop.location.toUpperCase()}
-                          </h2>
+                          <Link 
+                            href={`/journey/${stop.slug}`}
+                            className="group/link inline-flex items-center gap-2 hover:text-cyan-400 transition-colors"
+                          >
+                            <h2 className="font-cinematic text-xl md:text-2xl text-dust-100 tracking-wider group-hover/link:text-cyan-400 transition-colors">
+                              {stop.location.toUpperCase()}
+                            </h2>
+                            <ChevronRight className="h-5 w-5 text-dust-600 group-hover/link:text-cyan-400 group-hover/link:translate-x-1 transition-all" />
+                          </Link>
                           <p className="font-mono text-xs text-dust-500 tracking-wide">
                             {stop.region}
                           </p>
@@ -453,7 +174,7 @@ export default function JourneyPage() {
       </section>
 
       {/* ===== CTA ===== */}
-      <section className="py-20 bg-gradient-to-b from-stone-950 to-stone-900">
+      <section className="py-20 bg-gradient-to-b from-stone-950/70 to-stone-900/80 backdrop-blur-sm">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <p className="font-mono text-xs text-earth-500 tracking-widest mb-4">CONTINUE</p>
           <h2 className="font-cinematic text-4xl md:text-5xl text-dust-100 tracking-wider mb-6">
