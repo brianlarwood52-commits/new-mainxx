@@ -53,7 +53,7 @@ export default function HomePage() {
         <div className="relative z-20 text-center px-4 max-w-5xl">
           {/* Location tag */}
           <p className="location-tag mb-6 animate-fade-in">
-            Perth → Nullarbor → Port Lincoln → Esperance → Home
+            Swan View → Nullarbor → Port Lincoln → Esperance → Home
           </p>
           
           {/* Main Title */}

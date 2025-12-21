@@ -8,11 +8,11 @@ const journeyStops = [
   // OUTBOUND
   {
     km: 0,
-    location: 'Perth',
-    region: 'Western Australia',
+    location: 'Swan View',
+    region: 'Perth, Western Australia',
     description: 'Packed the car at dawn. The road stretched out ahead—thousands of kilometres of unknown waiting. Left behind the familiar. Drove towards... something.',
     type: 'start',
-    coordinates: '31.9°S 115.9°E',
+    coordinates: '31.9°S 116.0°E',
     leg: 'outbound',
   },
   {
@@ -125,11 +125,11 @@ const journeyStops = [
   },
   {
     km: 6859,
-    location: 'Perth',
-    region: 'Home',
+    location: 'Swan View',
+    region: 'Perth, Western Australia',
     description: 'Back where I started. But not the same person who left. 6,859.5 kilometres later, the road had done its work. The journey was over. The transformation was just beginning.',
     type: 'end',
-    coordinates: '31.9°S 115.9°E',
+    coordinates: '31.9°S 116.0°E',
     leg: 'return',
   },
 ]
@@ -176,7 +176,7 @@ export default function JourneyPage() {
             <div className="mb-6">
               <p className="font-mono text-xs text-green-500 tracking-widest mb-2">→ OUTBOUND</p>
               <div className="flex items-center gap-2 flex-wrap text-sm">
-                <span className="font-cinematic text-lg text-dust-300">PERTH</span>
+                <span className="font-cinematic text-lg text-dust-300">SWAN VIEW</span>
                 <span className="text-earth-600">→</span>
                 <span className="font-mono text-xs text-dust-500">NORSEMAN</span>
                 <span className="text-earth-600">→</span>
@@ -202,7 +202,7 @@ export default function JourneyPage() {
                 <span className="text-earth-600">→</span>
                 <span className="font-mono text-xs text-bight-400">ISRAELITE BAY</span>
                 <span className="text-earth-600">→</span>
-                <span className="font-cinematic text-lg text-dust-300">PERTH</span>
+                <span className="font-cinematic text-lg text-dust-300">SWAN VIEW</span>
               </div>
             </div>
             

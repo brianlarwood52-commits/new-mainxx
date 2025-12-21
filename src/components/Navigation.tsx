@@ -44,7 +44,7 @@ export default function Navigation() {
                 RUNNING TO GOD
               </p>
               <p className="font-mono text-[10px] text-dust-600 tracking-widest">
-                6,859 KM ROUND TRIP
+                SWAN VIEW, PERTH • 6,859 KM
               </p>
             </div>
           </Link>
