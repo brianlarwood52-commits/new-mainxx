@@ -22,7 +22,7 @@ export default function Logo({ size = 'md', showText = false, className = '' }: 
   return (
     <div className={`flex flex-col items-center ${className}`}>
       <Image
-        src="/running-to-god-logo-small.png"
+        src="/images/running-to-god-logo-small.png"
         alt="Running to God - Road leading to cross"
         width={width}
         height={height}
