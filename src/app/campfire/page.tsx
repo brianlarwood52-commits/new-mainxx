@@ -97,15 +97,32 @@ export default function CampfirePage() {
                   I pulled over immediately.
                 </p>
                 <p>
+                  I had a car fridge full of cold water, so I grabbed some bottles and offered them to him. 
+                  His reaction? <strong className="text-campfire-400">Like he&apos;d just won the lottery.</strong> Pure, 
+                  unbridled joy. Out here in the middle of nowhere, in that heat, cold water wasn&apos;t just 
+                  refreshing—it was liquid gold.
+                </p>
+                <p>
+                  I asked him why he was doing it. Why walk thousands of kilometres in a leopard suit across 
+                  one of the harshest landscapes on Earth?
+                </p>
+                <p className="text-xl text-cyan-400 font-journal my-6 text-center">
+                  &ldquo;Because I want to be a superhero. Spreading happiness.&rdquo;
+                </p>
+                <p>
+                  And in that moment, standing on a scorching highway 8 minutes from Norseman, I realised—
+                  <strong className="text-dust-100">he already was one.</strong>
+                </p>
+                <p>
                   Meet <strong className="text-dust-100">Kentaro Jin</strong>—a Japanese construction worker 
                   who decided to walk over <strong className="text-cyan-400">5,000 kilometres</strong> across 
-                  Australia. Not for speed. Not for records. But to spread kindness, positivity, and joy 
-                  to everyone he meets.
+                  Australia. Not for fame. Not for records. But because he wanted to be a superhero, 
+                  spreading happiness to everyone he meets.
                 </p>
                 <p>
                   After we chatted, I got back on the road—but I wasn&apos;t done. I jumped on the 
                   <strong className="text-cyan-400"> UHF radio</strong> and started telling every truckie and 
-                  traveller about him. Word spreads fast on the Nullarbor, and Catman deserved all the 
+                  traveller about him. Word spreads fast on the Nullarbor, and this superhero deserved all the 
                   encouragement he could get.
                 </p>
               </div>
@@ -116,17 +133,28 @@ export default function CampfirePage() {
                   <strong>Tip-off:</strong> Balladonia Roadhouse (excited traveller with photos)<br />
                   <strong>Location:</strong> 8 minutes east of Norseman, WA (GPS from photo metadata)<br />
                   <strong>Conditions:</strong> Extreme heat<br />
+                  <strong>The gift:</strong> Cold water from the car fridge (reaction: pure joy)<br />
+                  <strong>His why:</strong> &ldquo;I want to be a superhero, spreading happiness&rdquo;<br />
                   <strong>Follow-up:</strong> Spread the word via UHF radio to other travellers
                 </p>
               </div>
 
               <blockquote className="my-8 pl-4 border-l-2 border-campfire-500">
                 <p className="font-serif italic text-dust-400 text-lg">
+                  &ldquo;I want to be a superhero. Spreading happiness.&rdquo;
+                </p>
+                <cite className="font-mono text-xs text-campfire-500 mt-2 block">
+                  — KENTARO JIN, 8 MINUTES FROM NORSEMAN
+                </cite>
+              </blockquote>
+
+              <blockquote className="my-8 pl-4 border-l-2 border-stone-700">
+                <p className="font-serif italic text-dust-500 text-sm">
                   &ldquo;Australia is a very big country, and very nice people… I really like the journey. 
                   Every town, there are so many kinds of people, and they are kind to me. I love each town.&rdquo;
                 </p>
-                <cite className="font-mono text-xs text-campfire-500 mt-2 block">
-                  — KENTARO JIN
+                <cite className="font-mono text-xs text-dust-600 mt-2 block">
+                  — KENTARO JIN (ABC INTERVIEW)
                 </cite>
               </blockquote>
 
