@@ -1,0 +1,348 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Documentary-style fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Covered+By+Your+Grace&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@layer base {
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Dark mode (default) */
+  body, .dark body {
+    background-color: #0c0a09;
+    color: #e7e5e4;
+  }
+
+  /* Light mode */
+  .light body, body.light {
+    background-color: #f5f5f4;
+    color: #1c1917;
+  }
+
+  /* Cinematic headline font */
+  .font-cinematic {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.1em;
+  }
+
+  /* Handwritten journal font */
+  .font-journal {
+    font-family: 'Covered By Your Grace', cursive;
+  }
+
+  /* Technical/location font */
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Light mode overrides */
+.light .bg-stone-950 { background-color: #f5f5f4 !important; }
+.light .bg-stone-900 { background-color: #e7e5e4 !important; }
+.light .bg-stone-900\/50 { background-color: rgba(231, 229, 228, 0.5) !important; }
+.light .text-dust-100 { color: #1c1917 !important; }
+.light .text-dust-200 { color: #292524 !important; }
+.light .text-dust-300 { color: #44403c !important; }
+.light .text-dust-400 { color: #57534e !important; }
+.light .text-dust-500 { color: #78716c !important; }
+.light .text-dust-600 { color: #a8a29e !important; }
+.light .text-white { color: #1c1917 !important; }
+.light .border-stone-800 { border-color: #d6d3d1 !important; }
+.light .border-stone-900 { border-color: #e7e5e4 !important; }
+
+/* Light mode gradients */
+.light .from-stone-950 { --tw-gradient-from: #f5f5f4 !important; }
+.light .to-stone-950 { --tw-gradient-to: #f5f5f4 !important; }
+.light .via-stone-900 { --tw-gradient-via: #e7e5e4 !important; }
+.light .from-stone-900 { --tw-gradient-from: #e7e5e4 !important; }
+.light .to-stone-900 { --tw-gradient-to: #e7e5e4 !important; }
+
+/* Keep accent colors in light mode */
+.light .location-tag { color: #0891b2; }
+.light .text-earth-400, .light .text-earth-500 { color: #b85c1a !important; }
+.light .text-cyan-500 { color: #0891b2 !important; }
+
+/* ===== FILM GRAIN OVERLAY ===== */
+.film-grain {
+  position: relative;
+}
+.film-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.06;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* ===== CINEMATIC BARS ===== */
+.cinematic-bars::before,
+.cinematic-bars::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 8%;
+  background: black;
+  z-index: 10;
+}
+.cinematic-bars::before { top: 0; }
+.cinematic-bars::after { bottom: 0; }
+
+/* ===== DUST PARTICLES ===== */
+@keyframes dustFloat {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+}
+
+.dust-particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(212, 165, 116, 0.6);
+  border-radius: 50%;
+  animation: dustFloat 15s linear infinite;
+}
+
+/* ===== VIGNETTE EFFECT ===== */
+.vignette {
+  position: relative;
+}
+.vignette::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ===== DOCUMENTARY TITLE CARD ===== */
+.title-card {
+  text-shadow: 
+    0 0 40px rgba(0,0,0,0.8),
+    0 0 80px rgba(0,0,0,0.6),
+    2px 2px 0 rgba(0,0,0,0.5);
+}
+
+/* ===== JOURNAL PAPER TEXTURE ===== */
+.journal-paper {
+  background: linear-gradient(to bottom, #f5f0e6 0%, #ebe5d9 100%);
+  box-shadow: 
+    inset 0 0 30px rgba(139, 69, 19, 0.1),
+    0 4px 20px rgba(0,0,0,0.3);
+}
+
+.journal-paper::before {
+  content: '';
+  position: absolute;
+  left: 30px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(255, 100, 100, 0.3);
+}
+
+/* ===== WORN PHOTO EFFECT ===== */
+.worn-photo {
+  position: relative;
+  box-shadow: 
+    0 4px 15px rgba(0,0,0,0.4),
+    inset 0 0 50px rgba(0,0,0,0.1);
+}
+.worn-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.1) 0%,
+    transparent 50%,
+    rgba(0,0,0,0.15) 100%
+  );
+  pointer-events: none;
+}
+
+/* ===== ROAD LINE ANIMATION ===== */
+@keyframes roadDash {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -50; }
+}
+
+.road-dash {
+  stroke-dasharray: 20 15;
+  animation: roadDash 1s linear infinite;
+}
+
+/* ===== CAMPFIRE FLICKER ===== */
+@keyframes fireGlow {
+  0%, 100% { 
+    box-shadow: 0 0 20px #ff6b35, 0 0 40px #ff6b35, 0 0 60px rgba(255,107,53,0.5);
+    opacity: 1;
+  }
+  25% { 
+    box-shadow: 0 0 25px #ff8c00, 0 0 50px #ff6b35, 0 0 70px rgba(255,107,53,0.6);
+    opacity: 0.95;
+  }
+  50% { 
+    box-shadow: 0 0 15px #ff6b35, 0 0 35px #ff6b35, 0 0 55px rgba(255,107,53,0.4);
+    opacity: 0.9;
+  }
+  75% { 
+    box-shadow: 0 0 22px #ff8c00, 0 0 45px #ff6b35, 0 0 65px rgba(255,107,53,0.55);
+    opacity: 0.97;
+  }
+}
+
+.fire-glow {
+  animation: fireGlow 0.3s ease-in-out infinite;
+}
+
+/* ===== STAR TWINKLE ===== */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.star {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+/* ===== PARALLAX STARS ===== */
+@keyframes starTwinkle {
+  0%, 100% { opacity: var(--star-opacity, 0.3); }
+  50% { opacity: 1; }
+}
+
+.parallax-star {
+  animation: starTwinkle 4s ease-in-out infinite;
+}
+
+/* Shooting star */
+@keyframes shootingStar {
+  0%, 85%, 100% { 
+    opacity: 0; 
+    transform: rotate(-45deg) translateX(0);
+  }
+  87% { 
+    opacity: 0.8; 
+  }
+  92% { 
+    opacity: 0.8;
+    transform: rotate(-45deg) translateX(-300px);
+  }
+  93% {
+    opacity: 0;
+    transform: rotate(-45deg) translateX(-350px);
+  }
+}
+
+.shooting-star-anim {
+  animation: shootingStar 12s ease-in-out infinite;
+}
+
+@keyframes shootingStar2 {
+  0%, 45%, 100% { 
+    opacity: 0; 
+    transform: rotate(-35deg) translateX(0);
+  }
+  47% { 
+    opacity: 0.6; 
+  }
+  52% { 
+    opacity: 0.6;
+    transform: rotate(-35deg) translateX(-250px);
+  }
+  53% {
+    opacity: 0;
+    transform: rotate(-35deg) translateX(-300px);
+  }
+}
+
+.shooting-star-anim-2 {
+  animation: shootingStar2 18s ease-in-out infinite;
+  animation-delay: 5s;
+}
+
+/* ===== LOCATION TAG ===== */
+.location-tag {
+  @apply font-mono text-xs tracking-widest uppercase;
+  color: #cc7722;
+  text-shadow: 0 0 10px rgba(204, 119, 34, 0.5);
+}
+
+/* ===== CHAPTER MARKER ===== */
+.chapter-marker {
+  @apply relative pl-6;
+}
+.chapter-marker::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background: #cc7722;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #cc7722;
+}
+
+/* ===== QUOTE OVERLAY STYLE ===== */
+.quote-overlay {
+  @apply italic text-2xl md:text-4xl leading-relaxed;
+  font-family: 'Source Serif 4', serif;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+}
+
+/* ===== BUTTON - EXPEDITION STYLE ===== */
+.btn-expedition {
+  @apply relative px-8 py-4 font-mono text-sm uppercase tracking-widest;
+  background: linear-gradient(135deg, rgba(139,37,0,0.9), rgba(204,119,34,0.9));
+  border: 1px solid rgba(204,119,34,0.5);
+  color: #f5f0e6;
+  transition: all 0.3s ease;
+}
+.btn-expedition:hover {
+  background: linear-gradient(135deg, rgba(204,119,34,0.9), rgba(139,37,0,0.9));
+  box-shadow: 0 0 30px rgba(204,119,34,0.4);
+  transform: translateY(-2px);
+}
+
+/* ===== NAVIGATION - DOCUMENTARY STYLE ===== */
+.nav-documentary {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+}
+
+/* ===== SCROLL ANIMATIONS ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+/* ===== LIGHT MODE ADJUSTMENTS ===== */
+.light body {
+  @apply bg-stone-100 text-stone-800;
+}
+
+/* Theme transition */
+* {
+  transition: background-color 0.5s ease, color 0.3s ease;
+}

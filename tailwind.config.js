@@ -1,77 +1,93 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    './app/**/*.{js,ts,jsx,tsx}',
-    './src/**/*.{js,ts,jsx,tsx}',
-  ],
+module.exports = {
   darkMode: 'class',
+  content: [
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
   theme: {
     extend: {
-      fontFamily: {
-        'serif': ['Crimson Text', 'serif'],
-        'sans': ['Inter', 'sans-serif'],
-      },
       colors: {
-        flame: {
-          50: '#FFF7ED',
-          100: '#FFEDD5',
-          200: '#FED7AA',
-          300: '#FDBA74',
-          400: '#FB923C',
-          500: '#F97316',
-          600: '#EA580C',
-          700: '#C2410C',
-          800: '#9A3412',
-          900: '#7C2D12',
+        // Outback Earth
+        earth: {
+          50: '#fdf5f0',
+          100: '#f9e4d6',
+          200: '#f2c5a8',
+          300: '#e8a070',
+          400: '#dc7a42',
+          500: '#CC7722',
+          600: '#b85c1a',
+          700: '#8B2500',
+          800: '#6b2014',
+          900: '#4d1810',
+          950: '#2d0d08',
         },
-        sky: {
-          50: '#F0F9FF',
-          100: '#E0F2FE',
-          200: '#BAE6FD',
-          300: '#7DD3FC',
-          400: '#38BDF8',
-          500: '#0EA5E9',
-          600: '#0284C7',
-          700: '#0369A1',
-          800: '#075985',
-          900: '#0C4A6E',
+        // Dust
+        dust: {
+          50: '#faf8f5',
+          100: '#f5f0e6',
+          200: '#ebe5d9',
+          300: '#D4A574',
+          400: '#c4956a',
+          500: '#a67c52',
+          600: '#8a6642',
+          700: '#6e5135',
+          800: '#5a432d',
+          900: '#4a3828',
+          950: '#281e14',
         },
-        sage: {
-          50: '#F6F7F6',
-          100: '#E8EBE8',
-          200: '#D1D7D1',
-          300: '#B0BCB0',
-          400: '#8A9A8A',
-          500: '#6B7B6B',
-          600: '#546354',
-          700: '#445144',
-          800: '#384238',
-          900: '#2F362F',
-        }
+        // Spinifex
+        spinifex: {
+          500: '#8B8B3A',
+          600: '#6a6c32',
+          700: '#52532a',
+        },
+        // Night Sky
+        night: {
+          800: '#1a2836',
+          900: '#0f1a24',
+          950: '#080d12',
+        },
+        // Campfire
+        campfire: {
+          400: '#fb923c',
+          500: '#FF6B35',
+          600: '#ea580c',
+        },
+        // Bight Ocean
+        bight: {
+          400: '#38bdf8',
+          500: '#0ea5e9',
+          600: '#0284c7',
+        },
+      },
+      fontFamily: {
+        cinematic: ['Bebas Neue', 'sans-serif'],
+        journal: ['Covered By Your Grace', 'cursive'],
+        serif: ['Source Serif 4', 'Georgia', 'serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+      },
+      aspectRatio: {
+        'cinematic': '21 / 9',
+        'photo': '3 / 2',
       },
       animation: {
-        'fade-in': 'fadeIn 0.5s ease-in-out',
-        'slide-up': 'slideUp 0.6s ease-out',
-        'float': 'float 3s ease-in-out infinite',
+        'fade-in': 'fadeIn 1s ease-out',
+        'fade-in-up': 'fadeInUp 1s ease-out',
+        'dust': 'dustFloat 15s linear infinite',
       },
       keyframes: {
         fadeIn: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
-        slideUp: {
-          '0%': { transform: 'translateY(20px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(40px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-10px)' },
-        }
       },
-      backdropBlur: {
-        xs: '2px',
-      }
     },
   },
   plugins: [],
-};
+}
